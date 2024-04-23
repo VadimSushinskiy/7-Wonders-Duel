@@ -16,10 +16,10 @@ namespace _7_Wonders.Models
         {
             WarPoint = (warPoint >= 0) ? warPoint : (short)0;
         }
-        public override void GetProfit()
+        public override void GetProfit(Player player)
         {
             //TODO
-            base.GetProfit();
+            base.GetProfit(player);
         }
     }
 }

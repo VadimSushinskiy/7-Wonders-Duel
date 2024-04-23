@@ -26,7 +26,7 @@ namespace _7_Wonders.Models
             EpochNumber = epochNumber;
         }
 
-        public virtual void GetProfit()
+        public virtual void GetProfit(Player player)
         {
             //TODO
         }

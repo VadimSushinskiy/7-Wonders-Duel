@@ -17,10 +17,10 @@ namespace _7_Wonders.Models
             Symbol = symbol;
         }
 
-        public override void GetProfit()
+        public override void GetProfit(Player player)
         {
             //TODO
-            base.GetProfit();
+            base.GetProfit(player);
         }
     }
 }

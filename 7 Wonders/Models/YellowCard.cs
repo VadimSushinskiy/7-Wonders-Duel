@@ -35,10 +35,10 @@ namespace _7_Wonders.Models
         {
             Target = target;
         }
-        public override void GetProfit()
+        public override void GetProfit(Player player)
         {
             //TODO
-            base.GetProfit();
+            base.GetProfit(player);
         }
 
         public enum RewardTarget
