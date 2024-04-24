@@ -18,8 +18,24 @@ namespace _7_Wonders.Models
         }
         public override void GetProfit(Player player)
         {
-            //TODO
             base.GetProfit(player);
+            if (player == Game.FirstPlayer)
+            {
+                Game.WarPoints += WarPoint;
+                if (player.IsStrategy) Game.WarPoints++;
+            }
+            else
+            {
+                Game.WarPoints -= WarPoint;
+                if (player.IsStrategy) Game.WarPoints--;
+            }
+
+            player.RedCards.Add(this);
+
+            if (Game.WarPoints >= 10 || Game.WarPoints <= -10)
+            {
+                Game.End(Game.GameEnding.War);
+            }
         }
     }
 }

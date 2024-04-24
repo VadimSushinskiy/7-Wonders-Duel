@@ -21,5 +21,6 @@ namespace _7_Wonders
         {
             InitializeComponent();
         }
+
     }
 }

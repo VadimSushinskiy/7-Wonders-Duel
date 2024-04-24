@@ -10,103 +10,151 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Image\Altar.png" />
-    <None Remove="Image\Apothecary.png" />
-    <None Remove="Image\BackFirstEpoch.png" />
-    <None Remove="Image\Baths.png" />
-    <None Remove="Image\BookPublishing.png" />
-    <None Remove="Image\ClayMine.png" />
-    <None Remove="Image\ClayQuarry.png" />
-    <None Remove="Image\ClaySupply.png" />
-    <None Remove="Image\Garrison.png" />
-    <None Remove="Image\GlassWorkshop.png" />
-    <None Remove="Image\GraniteQuarry.png" />
-    <None Remove="Image\Herbalist.png" />
-    <None Remove="Image\LumberCamp.png" />
-    <None Remove="Image\Palisade.png" />
-    <None Remove="Image\Quarry.png" />
-    <None Remove="Image\Scriptorium.png" />
-    <None Remove="Image\SecurityTower.png" />
-    <None Remove="Image\Stable.png" />
-    <None Remove="Image\StoneSupply.png" />
-    <None Remove="Image\Tavern.png" />
-    <None Remove="Image\Theater.png" />
-    <None Remove="Image\TimberFelling.png" />
-    <None Remove="Image\WoodSupply.png" />
-    <None Remove="Image\Workshop.png" />
+    <None Remove="Images\Altar.png" />
+    <None Remove="Images\Apothecary.png" />
+    <None Remove="Images\BackFirstEpoch.png" />
+    <None Remove="Images\Baths.png" />
+    <None Remove="Images\BookPublishing.png" />
+    <None Remove="Images\ClayMine.png" />
+    <None Remove="Images\ClayQuarry.png" />
+    <None Remove="Images\ClaySupply.png" />
+    <None Remove="Images\Garrison.png" />
+    <None Remove="Images\GlassWorkshop.png" />
+    <None Remove="Images\GraniteQuarry.png" />
+    <None Remove="Images\Herbalist.png" />
+    <None Remove="Images\LumberCamp.png" />
+    <None Remove="Images\Palisade.png" />
+    <None Remove="Images\Quarry.png" />
+    <None Remove="Images\Scriptorium.png" />
+    <None Remove="Images\SecurityTower.png" />
+    <None Remove="Images\Stable.png" />
+    <None Remove="Images\StoneSupply.png" />
+    <None Remove="Images\Tavern.png" />
+    <None Remove="Images\Theater.png" />
+    <None Remove="Images\TimberFelling.png" />
+    <None Remove="Images\Wonders\CircusMaximus.png" />
+    <None Remove="Images\Wonders\Piraeus.png" />
+    <None Remove="Images\Wonders\TheAppianWay.png" />
+    <None Remove="Images\Wonders\TheColossus.png" />
+    <None Remove="Images\Wonders\TheGreatLibrary.png" />
+    <None Remove="Images\Wonders\TheGreatLighthouse.png" />
+    <None Remove="Images\Wonders\TheHangingGardens.png" />
+    <None Remove="Images\Wonders\TheMausoleum.png" />
+    <None Remove="Images\Wonders\ThePyramids.png" />
+    <None Remove="Images\Wonders\TheSphinx.png" />
+    <None Remove="Images\Wonders\TheStatueOfZeus.png" />
+    <None Remove="Images\Wonders\TheTempleOfArtemis.png" />
+    <None Remove="Images\WoodSupply.png" />
+    <None Remove="Images\Workshop.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Image\Altar.png">
+    <Resource Include="Images\Cards\Altar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Apothecary.png">
+    <Resource Include="Images\Cards\Apothecary.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\BackFirstEpoch.png">
+    <Resource Include="Images\Cards\BackFirstEpoch.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Baths.png">
+    <Resource Include="Images\Cards\Baths.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\BookPublishing.png">
+    <Resource Include="Images\Cards\BookPublishing.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\ClayMine.png">
+    <Resource Include="Images\Cards\ClayMine.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\ClayQuarry.png">
+    <Resource Include="Images\Cards\ClayQuarry.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\ClaySupply.png">
+    <Resource Include="Images\Cards\ClaySupply.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Garrison.png">
+    <Resource Include="Images\Cards\Garrison.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\GlassWorkshop.png">
+    <Resource Include="Images\Cards\GlassWorkshop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\GraniteQuarry.png">
+    <Resource Include="Images\Cards\GraniteQuarry.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Herbalist.png">
+    <Resource Include="Images\Cards\Herbalist.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\LumberCamp.png">
+    <Resource Include="Images\Cards\LumberCamp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Palisade.png">
+    <Resource Include="Images\Cards\Palisade.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Quarry.png">
+    <Resource Include="Images\Cards\Quarry.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Scriptorium.png">
+    <Resource Include="Images\Cards\Scriptorium.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\SecurityTower.png">
+    <Resource Include="Images\Cards\SecurityTower.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Stable.png">
+    <Resource Include="Images\Cards\Stable.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\StoneSupply.png">
+    <Resource Include="Images\Cards\StoneSupply.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Tavern.png">
+    <Resource Include="Images\Cards\Tavern.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Theater.png">
+    <Resource Include="Images\Cards\Theater.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\TimberFelling.png">
+    <Resource Include="Images\Cards\TimberFelling.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\WoodSupply.png">
+    <Resource Include="Images\Cards\WoodSupply.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\Workshop.png">
+    <Resource Include="Images\Cards\Workshop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\CircusMaximus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\Piraeus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\TheAppianWay.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\TheColossus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\TheGreatLibrary.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\TheGreatLighthouse.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\TheHangingGardens.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\TheMausoleum.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\ThePyramids.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\TheSphinx.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\TheStatueOfZeus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wonders\TheTempleOfArtemis.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

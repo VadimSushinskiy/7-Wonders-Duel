@@ -23,9 +23,76 @@ namespace _7_Wonders.Models
             Effect = effect;
         }
 
-        public void GetProfit()
+        public void GetProfit(Player player)
         {
-            //TODO
+            for (int i = 0; i < 6; i++)
+            {
+                 player.Resource[i] += Reward[i];
+            }
+            player.Fame += Fame;
+            if (player == Game.FirstPlayer)
+            {
+                Game.WarPoints += WarPoint;
+            }
+            else
+            {
+                Game.WarPoints -= WarPoint;
+            }
+
+            if (Game.WarPoints >= 9 || Game.WarPoints <= -9)
+            {
+                Game.End(Game.GameEnding.War);
+            }
+            else
+            {
+                if (Complex != ComplexResource.None)
+                {
+                    player.ComplexResources[Complex]++;
+                }
+
+                if (Effect != WonderEffect.None)
+                {
+                    switch (Effect)
+                    {
+                        case WonderEffect.StealGold:
+                        {
+                            if (player.Opponent.Resource.Gold >= 3) player.Opponent.Resource.Gold -= 3;
+                            else player.Opponent.Resource.Gold = 0;
+                            break;
+                        }
+                        case WonderEffect.StealGray:
+                        {
+                            if (player.Opponent.GrayCards.Count > 0)
+                            {
+                                player.ChosenCard.TakeProfit(player.Opponent);
+                                player.Opponent.GrayCards.Remove((GrayCard)player.ChosenCard);
+                                Game.DiscardedCards.Add(player.ChosenCard);
+                            }
+                            break;
+                        }
+                        case WonderEffect.StealBrown:
+                        {
+                            if (player.Opponent.BrownCards.Count > 0)
+                            {
+                                player.ChosenCard.TakeProfit(player.Opponent);
+                                player.Opponent.BrownCards.Remove((BrownCard)player.ChosenCard);
+                                Game.DiscardedCards.Add(player.ChosenCard);
+                            }
+                            break;
+                        }
+                        case WonderEffect.TakeDiscard:
+                        {
+                            player.ChosenCard.GetProfit(player);
+                            break;
+                        }
+                        case WonderEffect.Token:
+                        {
+                            player.ChosenToken.GetProfit(player);
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         public enum WonderEffect

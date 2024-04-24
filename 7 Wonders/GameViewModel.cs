@@ -18,7 +18,9 @@ namespace _7_Wonders
         
         public RelayCommand ShuffleCommand { get; set; }
         public RelayCommand BuyCommand { get; set; }
+        public RelayCommand SellCommand { get; set; }
 
+        public int[] BackCards = {2, 3, 4, 9, 10, 11, 12, 13};
         public ObservableCollection<string> CardsName { get; } = new();
 
         public ObservableCollection<Visibility> CardsVisibility { get; } = new();
@@ -46,22 +48,37 @@ namespace _7_Wonders
             }
         }
 
+        private int _war;
+
+        public int War
+        {
+            get => _war;
+            set
+            {
+                _war = value;
+                OnPropertyChanged(nameof(War));
+            }
+        }
+
+        public string[] Backs = { @"Images\Cards\BackFirstEpoch.png", @"Images\Cards\BackSecondEpoch.png" , @"Images\Cards\BackThirdEpoch.png" };
 
         public GameViewModel()
         {
             for (int i = 0; i < 20; i++)
             {
                 CardsVisibility.Add(Visibility.Visible);
-                CardsName.Add(@"Image\BackFirstEpoch.png");
+                CardsName.Add(@"Images\Cards\BackFirstEpoch.png");
             }
             ShuffleCommand = new RelayCommand(obj =>
             {
                 Game.InitializeGame();
-                for (int i = 0; i < Game.FirstEpochCards.Count; i++)
+                for (int i = 0; i < Game.CardsList.Count; i++)
                 {
-                    CardsName[i] = @"Image\" + Game.FirstEpochCards[i].Name + ".png";
+                    if (BackCards.Contains(i)) continue;
+                    CardsName[i] = @"Images\Cards\" + Game.CardsList[i].Name + ".png";
                 }
 
+                War = 0;
                 FirstResource = Game.FirstPlayer.Resource;
                 SecondResources = Game.SecondPlayer.Resource;
                 OnPropertyChanged(nameof(CardsName));
@@ -70,18 +87,51 @@ namespace _7_Wonders
             BuyCommand = new RelayCommand(obj =>
             {
                 int idx = int.Parse((string)obj);
-                Game.CurrentPlayer.BuyCard(Game.FirstEpochCards[idx]);
+                Game.CurrentPlayer.BuyCard(Game.CardsList[idx]);
+                CardsVisibility[idx] = Visibility.Collapsed;
+                FirstResource = Game.FirstPlayer.Resource;
+                SecondResources = Game.SecondPlayer.Resource;
+                if (War != Game.WarPoints)
+                {
+                    War = Game.WarPoints;
+                }
+                CheckBacks();
+                OnPropertyChanged(nameof(CardsVisibility));
+            }, obj =>
+            {
+                Card card = Game.CardsList[int.Parse((string)obj)];
+                return (card.IsAvailable && Game.CurrentPlayer.CheckPrice(card) != -1);
+            });
+
+            SellCommand = new RelayCommand(obj =>
+            {
+                int idx = int.Parse((string)obj);
+                Game.CurrentPlayer.SellCard(Game.CardsList[idx]);
                 CardsVisibility[idx] = Visibility.Collapsed;
                 FirstResource = Game.FirstPlayer.Resource;
                 SecondResources = Game.SecondPlayer.Resource;
                 OnPropertyChanged(nameof(CardsVisibility));
+                CheckBacks();
             }, obj =>
             {
-                Card card = Game.FirstEpochCards[int.Parse((string)obj)];
-                return (card.IsAvailable && Game.CurrentPlayer.CheckPrice(card) != -1);
+                Card card = Game.CardsList[int.Parse((string)obj)];
+                return (card.IsAvailable);
             });
         }
-        
+
+        public void CheckBacks()
+        {
+            bool flag = false;
+            for (int i = 0; i < Game.CardsList.Count; i++)
+            {
+                if (Backs.Contains(CardsName[i]) && Game.CardsList[i].IsAvailable)
+                {
+                    CardsName[i] = @"Images\Cards\" + Game.CardsList[i].Name + ".png";
+                    flag = true;
+                }
+            }
+            if (flag) OnPropertyChanged(nameof(CardsName));
+        }
 
         public void OnPropertyChanged(string propertyName)
         {
@@ -89,5 +139,4 @@ namespace _7_Wonders
         }
 
     }
-    
 }

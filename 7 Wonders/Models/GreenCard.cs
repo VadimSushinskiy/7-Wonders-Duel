@@ -19,8 +19,16 @@ namespace _7_Wonders.Models
 
         public override void GetProfit(Player player)
         {
-            //TODO
             base.GetProfit(player);
+            if (!player.Symbols[(int)Symbol])
+            {
+                player.Symbols[(int)Symbol] = true;
+            }
+            else
+            {
+                player.ChosenToken.GetProfit(player);
+            }
+            player.GreenCards.Add(this);
         }
     }
 }

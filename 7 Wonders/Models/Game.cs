@@ -14,19 +14,17 @@ namespace _7_Wonders.Models
         public static int WarPoints { get; set; }
         public static byte Epoch { get; set; }
         public static int CardNumber { get; set; }
-        public static List<Card> FirstEpochCards { get; set; }
-        public static List<Card> SecondEpochCards { get; set; }
-        public static List<Card> ThirdEpochCards { get; set; }
         public static List<Card> DiscardedCards { get; set; }
-        public static Dictionary<Card, List<Card>> FirstEpochGraph { get; set; }
-        public static Dictionary<Card, List<Card>> SecondEpochGraph { get; set; }
-        public static Dictionary<Card, List<Card>> ThirdEpochGraph { get; set; }
-        public static List<Token> Tokens { get; set; }
+        public static List<Card> CardsList { get; set; }
+        public static Dictionary<Card, List<Card>> CardGraph { get; set; }
+        public static List<Token> GameTokens { get; set; }
+        public static List<Token> AdditionalTokens { get; set; }
         public static bool WonderIsAvailable { get; set; }
         public static Random rnd = new Random();
 
         public static void InitializeGame()
         {
+            List<Card> cards;
             FirstPlayer = new Player("Player 1");
             SecondPlayer = new Player("Player 2");
             CurrentPlayer = FirstPlayer;
@@ -35,7 +33,8 @@ namespace _7_Wonders.Models
             WarPoints = 0;
             Epoch = 1;
             CardNumber = 20;
-            FirstEpochCards = new List<Card>()
+            CardsList = new List<Card>();
+            cards = new List<Card>
             {
                 new BlueCard(1, BuildLink.None, BuildLink.Moon, new Resources(), new Resources(), 3, "Altar"),
                 new GreenCard(1, BuildLink.None, BuildLink.Gear, new Resources() { Gold = 2 }, new Resources(), 0, "Apothecary", ScienceSymbol.Pounder),
@@ -61,34 +60,40 @@ namespace _7_Wonders.Models
                 new YellowCard(1, BuildLink.None, BuildLink.None, new Resources() {Gold = 3}, new Resources(), 0, "WoodSupply", Sale.WoodSale),
                 new GreenCard(1, BuildLink.None, BuildLink.None, new Resources() {Paper = 1}, new Resources(), 1, "Workshop", ScienceSymbol.Ruler)
             };
-            SecondEpochCards = new List<Card>();
-            ThirdEpochCards = new List<Card>();
-            DiscardedCards = new List<Card>();
-            Tokens = new List<Token>();
-            WonderIsAvailable = true;
-            Shuffle(FirstEpochCards);
-            FirstEpochCards.RemoveAt(22);
-            FirstEpochCards.RemoveAt(21);
-            FirstEpochCards.RemoveAt(20);
-            FirstEpochGraph = new Dictionary<Card, List<Card>>
+            AddCards(cards);
+            cards = new List<Card>
             {
-                {FirstEpochCards[0], new List<Card> {FirstEpochCards[2], FirstEpochCards[3] }}, {FirstEpochCards[1], new List<Card> {FirstEpochCards[3], FirstEpochCards[4] }},
-                {FirstEpochCards[2], new List<Card> {FirstEpochCards[5], FirstEpochCards[6] }}, {FirstEpochCards[3], new List<Card> {FirstEpochCards[6], FirstEpochCards[7] }},
-                {FirstEpochCards[4], new List<Card> {FirstEpochCards[7], FirstEpochCards[8] }}, {FirstEpochCards[5], new List<Card> {FirstEpochCards[9], FirstEpochCards[10] }},
-                {FirstEpochCards[6], new List<Card> {FirstEpochCards[10], FirstEpochCards[11] }}, {FirstEpochCards[7], new List<Card> {FirstEpochCards[11], FirstEpochCards[12] }},
-                {FirstEpochCards[8], new List<Card> {FirstEpochCards[12], FirstEpochCards[13] }}, 
-                {FirstEpochCards[9], new List<Card> {FirstEpochCards[14], FirstEpochCards[15] }}, {FirstEpochCards[10], new List<Card> {FirstEpochCards[15], FirstEpochCards[16] }},
-                {FirstEpochCards[11], new List<Card> {FirstEpochCards[16], FirstEpochCards[17] }}, {FirstEpochCards[12], new List<Card> {FirstEpochCards[17], FirstEpochCards[18] }},
-                {FirstEpochCards[13], new List<Card> {FirstEpochCards[18], FirstEpochCards[19] }}, {FirstEpochCards[14], new List<Card>()}, {FirstEpochCards[15], new List<Card>()},
-                {FirstEpochCards[16], new List<Card>()}, {FirstEpochCards[17], new List<Card>()}, {FirstEpochCards[18], new List<Card>()}, {FirstEpochCards[19], new List<Card>()},
+
+            };
+            //AddCards(cards);
+            cards = new List<Card>
+            {
+
+            };
+            //AddCards(cards);
+            DiscardedCards = new List<Card>();
+            GameTokens = new List<Token>();
+            AdditionalTokens = new List<Token>();
+            WonderIsAvailable = true;
+
+
+            CardGraph = new Dictionary<Card, List<Card>>
+            {
+                {CardsList[0], new List<Card> { CardsList[2], CardsList[3] }}, {CardsList[1], new List<Card> { CardsList[3], CardsList[4] }},
+                {CardsList[2], new List<Card> { CardsList[5], CardsList[6] }}, {CardsList[3], new List<Card> { CardsList[6], CardsList[7] }},
+                {CardsList[4], new List<Card> { CardsList[7], CardsList[8] }}, {CardsList[5], new List<Card> { CardsList[9], CardsList[10] }},
+                {CardsList[6], new List<Card> { CardsList[10], CardsList[11] }}, {CardsList[7], new List<Card> { CardsList[11], CardsList[12] }},
+                {CardsList[8], new List<Card> { CardsList[12], CardsList[13] }}, 
+                {CardsList[9], new List<Card> { CardsList[14], CardsList[15] }}, {CardsList[10], new List<Card> { CardsList[15], CardsList[16] }},
+                {CardsList[11], new List<Card> { CardsList[16], CardsList[17] }}, {CardsList[12], new List<Card> { CardsList[17], CardsList[18] }},
+                {CardsList[13], new List<Card> { CardsList[18], CardsList[19] }}, {CardsList[14], new List<Card>()}, {CardsList[15], new List<Card>()},
+                {CardsList[16], new List<Card>()}, {CardsList[17], new List<Card>()}, {CardsList[18], new List<Card>()}, {CardsList[19], new List<Card>()},
 
             };
             for (int i = 14; i < 20; i++)
             {
-                FirstEpochCards[i].IsAvailable = true;
+                CardsList[i].IsAvailable = true;
             }
-            SecondEpochGraph = new Dictionary<Card, List<Card>>();
-            ThirdEpochGraph = new Dictionary<Card, List<Card>>();
         }
 
         public static void Shuffle<T>(List<T> list)
@@ -102,9 +107,30 @@ namespace _7_Wonders.Models
             }
         }
 
+        public static void AddCards(List<Card> lst)
+        {
+            Shuffle(lst);
+            lst.RemoveAt(22);
+            lst.RemoveAt(21);
+            lst.RemoveAt(20);
+            CardsList.AddRange(lst);
+        }
+
         public static void ChangeEpoch()
         {
             //TODO
+        }
+
+        public static void End(GameEnding ending)
+        {
+            //TODO
+        }
+
+        public enum GameEnding
+        {
+            Standard,
+            War,
+            Science
         }
     }
 }

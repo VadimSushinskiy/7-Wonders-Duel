@@ -18,8 +18,8 @@ namespace _7_Wonders.Models
 
         public override void GetProfit(Player player)
         {
-            //TODO
             base.GetProfit(player);
+            player.BlueCards.Add(this);
         }
     }
 }

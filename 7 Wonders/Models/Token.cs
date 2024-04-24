@@ -22,6 +22,11 @@ namespace _7_Wonders.Models
             Effect = effect;
         }
 
+        public void GetProfit(Player player)
+        {
+            //TODO
+        }
+
         public enum TokenEffect
         {
             None,

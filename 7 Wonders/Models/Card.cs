@@ -28,7 +28,28 @@ namespace _7_Wonders.Models
 
         public virtual void GetProfit(Player player)
         {
-            //TODO
+            for (int i = 0; i < 6; i++)
+            {
+                player.Resource[i] += Reward[i];
+            }
+            player.Fame += Fame;
+            if (AddedLink != BuildLink.None)
+            {
+                player.BuildLinks[AddedLink] = true;
+            }
+        }
+
+        public void TakeProfit(Player player)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                player.Resource[i] -= Reward[i];
+            }
+            player.Fame -= Fame;
+            if (AddedLink != BuildLink.None)
+            {
+                player.BuildLinks[AddedLink] = false;
+            }
         }
     }
 }

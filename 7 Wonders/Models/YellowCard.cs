@@ -37,8 +37,23 @@ namespace _7_Wonders.Models
         }
         public override void GetProfit(Player player)
         {
-            //TODO
             base.GetProfit(player);
+            if (Sale != Sale.None)
+            {
+                player.Sales[Sale] = true;
+            }
+
+            if (Complex != ComplexResource.None)
+            {
+                player.ComplexResources[Complex]++;
+            }
+
+            if (Target != RewardTarget.None)
+            {
+                //TODO
+            }
+
+            player.YellowCards.Add(this);
         }
 
         public enum RewardTarget

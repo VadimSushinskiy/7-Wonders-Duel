@@ -14,6 +14,8 @@ namespace _7_Wonders.Models
         public bool[] Symbols { get; set; }
         public short Fame { get; set; }
         public int WondersCount { get; set; }
+        public Card ChosenCard { get; set; }
+        public Token ChosenToken { get; set; }
         public List<RedCard> RedCards { get; set; }
         public List<BlueCard> BlueCards { get; set; }
         public List<GreenCard> GreenCards { get; set; }
@@ -183,7 +185,7 @@ namespace _7_Wonders.Models
             }
 
             Resource.Gold -= (short)price;
-            wonder.GetProfit();
+            wonder.GetProfit(this);
             DeleteCard(card);
             if (Game.CardNumber == 0 || (!wonder.SecondTurn && !IsTheology))
             {
@@ -195,12 +197,12 @@ namespace _7_Wonders.Models
         {
             for (int i = 0; i < 20; i++)
             {
-                if (Game.FirstEpochGraph[Game.FirstEpochCards[i]].Contains(card))
+                if (Game.CardGraph[Game.CardsList[i]].Contains(card))
                 {
-                    Game.FirstEpochGraph[Game.FirstEpochCards[i]].Remove(card);
-                    if (Game.FirstEpochGraph[Game.FirstEpochCards[i]].Count == 0)
+                    Game.CardGraph[Game.CardsList[i]].Remove(card);
+                    if (Game.CardGraph[Game.CardsList[i]].Count == 0)
                     {
-                        Game.FirstEpochCards[i].IsAvailable = true;
+                        Game.CardsList[i].IsAvailable = true;
                     }
                 }
             }
@@ -214,5 +216,6 @@ namespace _7_Wonders.Models
                 Game.ChangeEpoch();
             }
         }
+
     }
 }
