@@ -16,6 +16,7 @@ namespace _7_Wonders.Models
         public static int CardNumber { get; set; }
         public static List<Card> DiscardedCards { get; set; }
         public static List<Card> CardsList { get; set; }
+        public static List<Wonder> WondersList { get; set; }
         public static Dictionary<Card, List<Card>> CardGraph { get; set; }
         public static List<Token> GameTokens { get; set; }
         public static List<Token> AdditionalTokens { get; set; }
@@ -71,6 +72,27 @@ namespace _7_Wonders.Models
 
             };
             //AddCards(cards);
+            WondersList = new List<Wonder>
+            {
+                new Wonder(1, false, ComplexResource.None, Wonder.WonderEffect.StealGray, new Resources { Wood = 1, Stone = 2, Glass = 1}, new Resources(), 3, "CircusMaximus" ),
+                new Wonder(0, true, ComplexResource.GrayResource, Wonder.WonderEffect.None, new Resources {Wood = 2, Stone = 1, Brick = 1}, new Resources(), 2, "Piraeus"),
+                new Wonder(0, true, ComplexResource.None, Wonder.WonderEffect.StealGold, new Resources { Stone = 2, Brick = 2, Paper = 1}, new Resources {Gold = 3}, 3, "TheAppianWay"),
+                new Wonder(2, false, ComplexResource.None, Wonder.WonderEffect.None, new Resources {Brick = 3, Glass = 1}, new Resources(), 3, "TheColossus"),
+                new Wonder(0, false, ComplexResource.None, Wonder.WonderEffect.Token, new Resources {Wood = 3, Paper = 1, Glass = 1}, new Resources(), 4, "TheGreatLibrary"),
+                new Wonder(0, false, ComplexResource.BrownResource, Wonder.WonderEffect.None, new Resources {Wood = 1, Stone = 1, Paper = 2}, new Resources(), 4, "TheGreatLighthouse"),
+                new Wonder(0, true, ComplexResource.None, Wonder.WonderEffect.None, new Resources {Wood = 2, Glass= 1, Paper = 1}, new Resources {Gold = 6}, 3, "TheHangingGardens"),
+                new Wonder(0, false, ComplexResource.None, Wonder.WonderEffect.TakeDiscard, new Resources {Brick = 2, Glass = 2, Paper = 1}, new Resources(), 2, "TheMausoleum"),
+                new Wonder(0, false, ComplexResource.None, Wonder.WonderEffect.None, new Resources {Stone = 3, Paper = 1}, new Resources(), 9, "ThePyramids"),
+                new Wonder(0, true, ComplexResource.None, Wonder.WonderEffect.None, new Resources {Stone = 1, Brick = 1, Glass = 2}, new Resources(), 6, "TheSphinx"),
+                new Wonder(1, false, ComplexResource.None, Wonder.WonderEffect.StealBrown, new Resources {Wood = 1, Stone = 1, Brick = 1, Paper = 2}, new Resources(), 3, "TheStatueOfZeus"),
+                new Wonder(0, true, ComplexResource.None, Wonder.WonderEffect.None, new Resources {Wood = 1, Stone = 1, Glass = 1, Paper = 1}, new Resources {Gold = 12}, 0, "TheTempleOfArtemis")
+            };
+            Shuffle(WondersList);
+            for (int i = 0; i < 4;  i++)
+            {
+                FirstPlayer.Wonders[WondersList[i]] = false;
+                SecondPlayer.Wonders[WondersList[i + 4]] = false;
+            }
             DiscardedCards = new List<Card>();
             GameTokens = new List<Token>();
             AdditionalTokens = new List<Token>();

@@ -11,5 +11,8 @@
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="IsReadOnly" Value="True"/>
         </Style>
+        <Style TargetType="Image">
+            <Setter Property="Width" Value="125"/>
+        </Style>
     </Application.Resources>
 </Application>

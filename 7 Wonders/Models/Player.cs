@@ -52,6 +52,7 @@ namespace _7_Wonders.Models
             GrayCards = new List<GrayCard>();
             YellowCards = new List<YellowCard>();
             PurpleCards = new List<PurpleCard>();
+            Wonders = new Dictionary<Wonder, bool>();
             Sales = new Dictionary<Sale, bool>
             {
                 { Sale.BrickSale, false }, { Sale.StoneSale, false }, { Sale.WoodSale, false }, { Sale.PaperAndGlassSale, false }
@@ -186,6 +187,7 @@ namespace _7_Wonders.Models
 
             Resource.Gold -= (short)price;
             wonder.GetProfit(this);
+            Wonders[wonder] = true;
             DeleteCard(card);
             if (Game.CardNumber == 0 || (!wonder.SecondTurn && !IsTheology))
             {

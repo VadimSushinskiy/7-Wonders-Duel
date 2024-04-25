@@ -82,7 +82,10 @@ namespace _7_Wonders.Models
                         }
                         case WonderEffect.TakeDiscard:
                         {
-                            player.ChosenCard.GetProfit(player);
+                            if (Game.DiscardedCards.Count > 0)
+                            {
+                                player.ChosenCard.GetProfit(player);
+                            }
                             break;
                         }
                         case WonderEffect.Token:

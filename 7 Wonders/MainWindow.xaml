@@ -9,181 +9,630 @@
     <Window.DataContext>
         <local:GameViewModel></local:GameViewModel>
     </Window.DataContext>
-    <DockPanel Name="TopMenu" LastChildFill="True">
-        <DockPanel Width="1920" Height="100" Background="Gray" DockPanel.Dock="Top" LastChildFill="False">
-            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Gold, StringFormat=Gold:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Wood, StringFormat=Wood:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Stone, StringFormat=Stone:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Brick, StringFormat=Brick:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Paper, StringFormat=Paper:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Glass, StringFormat=Glass:&#x0d;&#x0a; {0}}"/>
-            </StackPanel>
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Gold, StringFormat=Gold:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Wood, StringFormat=Wood:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Stone, StringFormat=Stone:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Brick, StringFormat=Brick:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Paper, StringFormat=Paper:&#x0d;&#x0a; {0}}"/>
-                <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Glass, StringFormat=Glass:&#x0d;&#x0a; {0}}"/>
-            </StackPanel>
-            <TextBox Style="{StaticResource ResourceButtonTemplate}" Margin="30 0 0 0" Width="125" Text="{Binding War, StringFormat=War Points:&#x0d;&#x0a; {0}}"/>
-        </DockPanel>
-        <Canvas Width="300" DockPanel.Dock="Left">
-            <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="130" Canvas.Left="245">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="90"></RotateTransform>
-                </Image.RenderTransform>
-            </Image>
-            <Image Source="Images/Wonders/CircusMaximus.png" Canvas.Top="100" Canvas.Left="30" Width="325"/>
-            <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="480" Canvas.Left="245">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="90"></RotateTransform>
-                </Image.RenderTransform>
-            </Image>
-            <Image Source="Images/Wonders/CircusMaximus.png" Canvas.Top="450" Canvas.Left="30" Width="325"/>
-        </Canvas>
-        <Canvas Width="300" DockPanel.Dock="Right">
-            <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="280" Canvas.Right="95">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="-90"></RotateTransform>
-                </Image.RenderTransform>
-            </Image>
-            <Image Source="Images/Wonders/CircusMaximus.png" Canvas.Top="100" Canvas.Right="30" Width="325"/>
-            <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="630" Canvas.Right="95">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="-90"></RotateTransform>
-                </Image.RenderTransform>
-            </Image>
-            <Image Source="Images/Wonders/CircusMaximus.png" Canvas.Top="450" Canvas.Right="30" Width="325"/>
-        </Canvas>
-        <StackPanel  Height="200" DockPanel.Dock="Bottom" Background="Red">
-            <Button Content="Press Me!" Height="50" Width="300" Command="{Binding ShuffleCommand}"/>
-        </StackPanel>
-        <Grid>
-            <Canvas Grid.Column="0" Grid.Row="0">
-                <Image Source="{Binding CardsName[0]}" Visibility="{Binding CardsVisibility[0]}" Canvas.Bottom="450" Canvas.Left="700" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="0"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="0"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[1]}" Visibility="{Binding CardsVisibility[1]}" Canvas.Bottom="450" Canvas.Left="500" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="1"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="1"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[2]}" Visibility="{Binding CardsVisibility[2]}" Canvas.Bottom="350" Canvas.Left="800" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="2"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="2"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[3]}" Visibility="{Binding CardsVisibility[3]}" Canvas.Bottom="350" Canvas.Left="600" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="3"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="3"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[4]}" Visibility="{Binding CardsVisibility[4]}" Canvas.Bottom="350" Canvas.Left="400" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="4"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="4"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[5]}" Visibility="{Binding CardsVisibility[5]}" Canvas.Bottom="250" Canvas.Left="900" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="5"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="5"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[6]}" Visibility="{Binding CardsVisibility[6]}" Canvas.Bottom="250" Canvas.Left="700" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="6"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="6"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[7]}" Visibility="{Binding CardsVisibility[7]}" Canvas.Bottom="250" Canvas.Left="500" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="7"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="7"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[8]}" Visibility="{Binding CardsVisibility[8]}" Canvas.Bottom="250" Canvas.Left="300" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="8"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="8"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[9]}" Visibility="{Binding CardsVisibility[9]}" Canvas.Bottom="150" Canvas.Left="1000" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="9"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="9"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[10]}" Visibility="{Binding CardsVisibility[10]}" Canvas.Bottom="150" Canvas.Left="800" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="10"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="10"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[11]}" Visibility="{Binding CardsVisibility[11]}" Canvas.Bottom="150" Canvas.Left="600" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="11"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="11"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[12]}" Visibility="{Binding CardsVisibility[12]}" Canvas.Bottom="150" Canvas.Left="400" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="12"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="12"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[13]}" Visibility="{Binding CardsVisibility[13]}" Canvas.Bottom="150" Canvas.Left="200" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="13"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="13"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[14]}" Visibility="{Binding CardsVisibility[14]}" Canvas.Bottom="50" Canvas.Left="1100" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="14"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="14"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[15]}" Visibility="{Binding CardsVisibility[15]}" Canvas.Bottom="50" Canvas.Left="900" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="15"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="15"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[16]}" Visibility="{Binding CardsVisibility[16]}" Canvas.Bottom="50" Canvas.Left="700" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="16"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="16"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[17]}" Visibility="{Binding CardsVisibility[17]}" Canvas.Bottom="50" Canvas.Left="500" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="17"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="17"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[18]}" Visibility="{Binding CardsVisibility[18]}" Canvas.Bottom="50" Canvas.Left="300" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="18"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="18"/>
-                    </Image.InputBindings>
-                </Image>
-                <Image Source="{Binding CardsName[19]}" Visibility="{Binding CardsVisibility[19]}" Canvas.Bottom="50" Canvas.Left="100" Width="125">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="19"/>
-                        <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="19"/>
-                    </Image.InputBindings>
-                </Image>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="145"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="True" Grid.Row="0" Grid.RowSpan="2">
+            <DockPanel Width="1920" Height="100" Background="Gray" DockPanel.Dock="Top" LastChildFill="False">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Gold, StringFormat=Gold:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Wood, StringFormat=Wood:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Stone, StringFormat=Stone:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Brick, StringFormat=Brick:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Paper, StringFormat=Paper:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding FirstResource.Glass, StringFormat=Glass:&#x0d;&#x0a; {0}}"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Gold, StringFormat=Gold:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Wood, StringFormat=Wood:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Stone, StringFormat=Stone:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Brick, StringFormat=Brick:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Paper, StringFormat=Paper:&#x0d;&#x0a; {0}}"/>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Glass, StringFormat=Glass:&#x0d;&#x0a; {0}}"/>
+                </StackPanel>
+                <TextBox Style="{StaticResource ResourceButtonTemplate}" Margin="30 0 0 0" Width="125" Text="{Binding War, StringFormat=War Points:&#x0d;&#x0a; {0}}"/>
+                <Button Name="StartButton" Content="Start Game!" Visibility="{Binding StartButtonVisibility}" Height="50" Width="300" Command="{Binding ShuffleCommand}"/>
+            </DockPanel>
+            <DockPanel Width="1920" DockPanel.Dock="Top">
+                <TextBox DockPanel.Dock="Left" FontSize="32" Text="{Binding FirstPlayerName}" Foreground="{Binding NameColors[0]}" IsReadOnly="True"/>
+                <TextBox DockPanel.Dock="Right" FontSize="32" Text="{Binding SecondPlayerName}" Foreground="{Binding NameColors[1]}" IsReadOnly="True"/>
+                <TextBox IsReadOnly="True" FontSize="32" TextAlignment="Center" Text="{Binding Help}" Foreground="{Binding HelpColor}"/>
+            </DockPanel>
+            <DockPanel Height="203" DockPanel.Dock="Bottom" >
+                <Button Height="203" Width="22" DockPanel.Dock="Left" Command="{Binding HandFlipCommand}"/>
+                <Button Height="203" Width="22" DockPanel.Dock="Right" Command="{Binding HandFlipCommand}"/>
+                <Grid>
+                    <Grid Visibility="{Binding PlayersInterfaceVisibility[0]}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding FirstPlayerHandVisibility[0]}">
+                            <Image Source="{Binding FirstPlayerCards[0]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[1]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[2]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[3]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[4]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[5]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[6]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[7]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[8]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[9]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[10]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[11]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[12]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[13]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[14]}" Width="125"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding FirstPlayerHandVisibility[1]}">
+                            <Image Source="{Binding FirstPlayerCards[15]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[16]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[17]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[18]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[19]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[20]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[21]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[22]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[23]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[24]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[25]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[26]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[27]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[28]}" Width="125"/>
+                            <Image Source="{Binding FirstPlayerCards[29]}" Width="125"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Visibility="{Binding PlayersInterfaceVisibility[1]}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding SecondPlayerHandVisibility[0]}">
+                            <Image Source="{Binding SecondPlayerCards[0]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[1]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[2]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[3]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[4]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[5]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[6]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[7]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[8]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[9]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[10]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[11]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[12]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[13]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[14]}" Width="125"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding SecondPlayerHandVisibility[1]}">
+                            <Image Source="{Binding SecondPlayerCards[15]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[16]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[17]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[18]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[19]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[20]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[21]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[22]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[23]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[24]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[25]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[26]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[27]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[28]}" Width="125"/>
+                            <Image Source="{Binding SecondPlayerCards[29]}" Width="125"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+            <Canvas Width="300" DockPanel.Dock="Left">
+                <Canvas Canvas.Left="0" Visibility="{Binding PlayersInterfaceVisibility[0]}">
+                    <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="142" Canvas.Left="205">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="90"></RotateTransform>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Source="{Binding WondersName[0]}" Canvas.Top="100" Canvas.Left="30" Width="325">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyWonderCommand}" CommandParameter="0"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="492" Canvas.Left="205">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="90"></RotateTransform>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Source="{Binding WondersName[1]}" Canvas.Top="450" Canvas.Left="30" Width="325">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyWonderCommand}" CommandParameter="1"/>
+                        </Image.InputBindings>
+                    </Image>
+                </Canvas>
+                <Canvas Canvas.Left="0" Visibility="{Binding PlayersInterfaceVisibility[1]}">
+                    <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="142" Canvas.Left="205">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="90"></RotateTransform>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Source="{Binding WondersName[4]}" Canvas.Top="100" Canvas.Left="30" Width="325">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyWonderCommand}" CommandParameter="4"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="492" Canvas.Left="205">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="90"></RotateTransform>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Source="{Binding WondersName[5]}" Canvas.Top="450" Canvas.Left="30" Width="325">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyWonderCommand}" CommandParameter="5"/>
+                        </Image.InputBindings>
+                    </Image>
+                </Canvas>
             </Canvas>
-        </Grid>
-    </DockPanel>
+            <Canvas Width="300" DockPanel.Dock="Right">
+                <Canvas Canvas.Right="0" Visibility="{Binding PlayersInterfaceVisibility[0]}">
+                    <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="268" Canvas.Right="80">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="-90"></RotateTransform>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Source="{Binding WondersName[2]}" Canvas.Top="100" Canvas.Right="30" Width="325">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyWonderCommand}" CommandParameter="2"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="618" Canvas.Right="80">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="-90"></RotateTransform>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Source="{Binding WondersName[3]}" Canvas.Top="450" Canvas.Right="30" Width="325">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyWonderCommand}" CommandParameter="3"/>
+                        </Image.InputBindings>
+                    </Image>
+                </Canvas>
+                <Canvas Canvas.Right="0" Visibility="{Binding PlayersInterfaceVisibility[1]}">
+                    <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="268" Canvas.Right="80">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="-90"></RotateTransform>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Source="{Binding WondersName[6]}" Canvas.Top="100" Canvas.Right="30" Width="325">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyWonderCommand}" CommandParameter="6"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="Images/Cards/BackFirstEpoch.png" Canvas.Top="618" Canvas.Right="80">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="-90"></RotateTransform>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Source="{Binding WondersName[7]}" Canvas.Top="450" Canvas.Right="30" Width="325">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyWonderCommand}" CommandParameter="7"/>
+                        </Image.InputBindings>
+                    </Image>
+                </Canvas>
+            </Canvas>
+            <Grid>
+                <Canvas Grid.Column="0" Grid.Row="0">
+                    <Image Source="{Binding CardsName[0]}" Visibility="{Binding CardsVisibility[0]}" Canvas.Bottom="450" Canvas.Left="700" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="0"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="0"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[1]}" Visibility="{Binding CardsVisibility[1]}" Canvas.Bottom="450" Canvas.Left="500" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="1"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="1"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[2]}" Visibility="{Binding CardsVisibility[2]}" Canvas.Bottom="350" Canvas.Left="800" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="2"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="2"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[3]}" Visibility="{Binding CardsVisibility[3]}" Canvas.Bottom="350" Canvas.Left="600" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="3"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="3"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[4]}" Visibility="{Binding CardsVisibility[4]}" Canvas.Bottom="350" Canvas.Left="400" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="4"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="4"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[5]}" Visibility="{Binding CardsVisibility[5]}" Canvas.Bottom="250" Canvas.Left="900" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="5"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="5"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[6]}" Visibility="{Binding CardsVisibility[6]}" Canvas.Bottom="250" Canvas.Left="700" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="6"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="6"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[7]}" Visibility="{Binding CardsVisibility[7]}" Canvas.Bottom="250" Canvas.Left="500" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="7"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="7"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[8]}" Visibility="{Binding CardsVisibility[8]}" Canvas.Bottom="250" Canvas.Left="300" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="8"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="8"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[9]}" Visibility="{Binding CardsVisibility[9]}" Canvas.Bottom="150" Canvas.Left="1000" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="9"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="9"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[10]}" Visibility="{Binding CardsVisibility[10]}" Canvas.Bottom="150" Canvas.Left="800" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="10"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="10"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[11]}" Visibility="{Binding CardsVisibility[11]}" Canvas.Bottom="150" Canvas.Left="600" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="11"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="11"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[12]}" Visibility="{Binding CardsVisibility[12]}" Canvas.Bottom="150" Canvas.Left="400" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="12"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="12"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[13]}" Visibility="{Binding CardsVisibility[13]}" Canvas.Bottom="150" Canvas.Left="200" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="13"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="13"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[14]}" Visibility="{Binding CardsVisibility[14]}" Canvas.Bottom="50" Canvas.Left="1100" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="14"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="14"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[15]}" Visibility="{Binding CardsVisibility[15]}" Canvas.Bottom="50" Canvas.Left="900" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="15"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="15"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[16]}" Visibility="{Binding CardsVisibility[16]}" Canvas.Bottom="50" Canvas.Left="700" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="16"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="16"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[17]}" Visibility="{Binding CardsVisibility[17]}" Canvas.Bottom="50" Canvas.Left="500" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="17"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="17"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[18]}" Visibility="{Binding CardsVisibility[18]}" Canvas.Bottom="50" Canvas.Left="300" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="18"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="18"/>
+                        </Image.InputBindings>
+                    </Image>
+                    <Image Source="{Binding CardsName[19]}" Visibility="{Binding CardsVisibility[19]}" Canvas.Bottom="50" Canvas.Left="100" Width="125">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="19"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="19"/>
+                        </Image.InputBindings>
+                    </Image>
+                </Canvas>
+            </Grid>
+        </DockPanel>
+        <WrapPanel Grid.Row="1" Background="AliceBlue" Visibility="{Binding WindowSelectingVisibility}">
+            <Image Source="{Binding SelectingCardsNames[0]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="0"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[1]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="1"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[2]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="2"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[3]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="3"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[4]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="4"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[5]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="5"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[6]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="6"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[7]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="7"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[8]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="8"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[9]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="9"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[10]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="10"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[11]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="11"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[12]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="12"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[13]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="13"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[14]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="14"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[15]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="15"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[16]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="16"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[17]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="17"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[18]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="18"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[19]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="19"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[20]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="20"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[21]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="21"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[22]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="22"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[23]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="23"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[24]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="24"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[25]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="25"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[26]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="26"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[27]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="27"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[28]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="28"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[29]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="29"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[30]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="30"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[31]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="31"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[32]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="32"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[33]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="33"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[34]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="34"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[35]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="35"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[36]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="36"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[37]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="37"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[38]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="38"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[39]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="39"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[40]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="40"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[41]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="41"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[42]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="42"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[43]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="43"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[44]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="44"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[45]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="45"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[46]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="46"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[47]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="47"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[48]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="48"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[49]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="49"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[50]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="50"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[51]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="51"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[52]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="52"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[53]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="53"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[54]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="54"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[55]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="55"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[56]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="56"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[57]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="57"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="{Binding SelectingCardsNames[58]}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="58"/>
+                </Image.InputBindings>
+            </Image>
+        </WrapPanel>
+    </Grid>
+    
 
 </Window>

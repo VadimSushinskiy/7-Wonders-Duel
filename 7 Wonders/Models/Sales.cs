@@ -10,8 +10,8 @@ namespace _7_Wonders.Models
     {
         None,
         BrickSale,
-        WoodSale,
         StoneSale,
+        WoodSale,
         PaperAndGlassSale
     }
 }
