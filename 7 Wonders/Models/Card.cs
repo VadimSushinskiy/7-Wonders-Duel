@@ -37,6 +37,10 @@ namespace _7_Wonders.Models
             {
                 player.BuildLinks[AddedLink] = true;
             }
+            if (LinkToBuy != BuildLink.None && player.BuildLinks[LinkToBuy] && player.TokenEffects[Token.TokenEffect.Urbanism])
+            {
+                player.Resource.Gold += 4;
+            } 
         }
 
         public void TakeProfit(Player player)

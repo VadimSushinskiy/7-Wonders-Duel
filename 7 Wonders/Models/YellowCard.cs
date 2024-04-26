@@ -50,7 +50,34 @@ namespace _7_Wonders.Models
 
             if (Target != RewardTarget.None)
             {
-                //TODO
+                switch (Target)
+                {
+                    case RewardTarget.Red:
+                    {
+                        player.Resource.Gold += (short)player.RedCards.Count;
+                        break;
+                    }
+                    case RewardTarget.Yellow:
+                    {
+                        player.Resource.Gold += (short)player.YellowCards.Count;
+                        break;
+                    }
+                    case RewardTarget.Brown:
+                    {
+                        player.Resource.Gold += (short)(2 * player.BrownCards.Count);
+                        break;
+                    }
+                    case RewardTarget.Gray:
+                    {
+                        player.Resource.Gold += (short)(3 * player.GrayCards.Count);
+                        break;
+                    }
+                    case RewardTarget.Wonder:
+                    {
+                        player.Resource.Gold += (short)(2 * player.WondersCount);
+                        break;
+                    }
+                }
             }
 
             player.YellowCards.Add(this);

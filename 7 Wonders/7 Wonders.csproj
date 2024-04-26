@@ -15,8 +15,60 @@
     <None Remove="Images\BackFirstEpoch.png" />
     <None Remove="Images\Baths.png" />
     <None Remove="Images\BookPublishing.png" />
+    <None Remove="Images\Cards\Academy.png" />
+    <None Remove="Images\Cards\Aqueduct.png" />
+    <None Remove="Images\Cards\Arena.png" />
+    <None Remove="Images\Cards\Armory.png" />
+    <None Remove="Images\Cards\Arsenal.png" />
+    <None Remove="Images\Cards\BackSecondEpoch.png" />
+    <None Remove="Images\Cards\BackThirdEpoch.png" />
+    <None Remove="Images\Cards\Barracks.png" />
+    <None Remove="Images\Cards\Brewery.png" />
+    <None Remove="Images\Cards\BrickWorkshop.png" />
+    <None Remove="Images\Cards\BuildersGuild.png" />
+    <None Remove="Images\Cards\Caravanserai.png" />
+    <None Remove="Images\Cards\Career.png" />
+    <None Remove="Images\Cards\Castle.png" />
+    <None Remove="Images\Cards\ChamberOfCommerce.png" />
+    <None Remove="Images\Cards\Circus.png" />
+    <None Remove="Images\Cards\Court.png" />
+    <None Remove="Images\Cards\Customs.png" />
+    <None Remove="Images\Cards\Dispensary.png" />
+    <None Remove="Images\Cards\DryingRoom.png" />
+    <None Remove="Images\Cards\Fortification.png" />
+    <None Remove="Images\Cards\Forum.png" />
+    <None Remove="Images\Cards\Gardens.png" />
+    <None Remove="Images\Cards\Glassblower.png" />
+    <None Remove="Images\Cards\HorseBreeders.png" />
+    <None Remove="Images\Cards\JudgesGuild.png" />
+    <None Remove="Images\Cards\Laboratory.png" />
+    <None Remove="Images\Cards\Library.png" />
+    <None Remove="Images\Cards\Lighthouse.png" />
+    <None Remove="Images\Cards\MerchantsGuild.png" />
+    <None Remove="Images\Cards\MoneylendersGuild.png" />
+    <None Remove="Images\Cards\Obelisk.png" />
+    <None Remove="Images\Cards\Observatories.png" />
     <None Remove="Images\Cards\p.png" />
+    <None Remove="Images\Cards\Pantheon.png" />
+    <None Remove="Images\Cards\Parade.png" />
+    <None Remove="Images\Cards\Port.png" />
+    <None Remove="Images\Cards\Sawmill.png" />
+    <None Remove="Images\Cards\School.png" />
+    <None Remove="Images\Cards\ScientistsGuild .png" />
+    <None Remove="Images\Cards\SedimentationWorkshop.png" />
+    <None Remove="Images\Cards\Senate.png" />
+    <None Remove="Images\Cards\ShipownersGuild.png" />
+    <None Remove="Images\Cards\ShootingRange.png" />
+    <None Remove="Images\Cards\Statue.png" />
+    <None Remove="Images\Cards\Studios.png" />
+    <None Remove="Images\Cards\Temple.png" />
+    <None Remove="Images\Cards\TownHall.png" />
     <None Remove="Images\Cards\Transparent.png" />
+    <None Remove="Images\Cards\Tribunal.png" />
+    <None Remove="Images\Cards\Tribune.png" />
+    <None Remove="Images\Cards\University.png" />
+    <None Remove="Images\Cards\Walls.png" />
+    <None Remove="Images\Cards\WarlordsGuild.png" />
     <None Remove="Images\ClayMine.png" />
     <None Remove="Images\ClayQuarry.png" />
     <None Remove="Images\ClaySupply.png" />
@@ -34,6 +86,14 @@
     <None Remove="Images\Tavern.png" />
     <None Remove="Images\Theater.png" />
     <None Remove="Images\TimberFelling.png" />
+    <None Remove="Images\Tokens\Agriculture.png" />
+    <None Remove="Images\Tokens\Economy.png" />
+    <None Remove="Images\Tokens\Law.png" />
+    <None Remove="Images\Tokens\Mathematics.png" />
+    <None Remove="Images\Tokens\Philosophy.png" />
+    <None Remove="Images\Tokens\Strategy.png" />
+    <None Remove="Images\Tokens\Theology.png" />
+    <None Remove="Images\Tokens\Urbanism.png" />
     <None Remove="Images\Wonders\CircusMaximus.png" />
     <None Remove="Images\Wonders\Piraeus.png" />
     <None Remove="Images\Wonders\TheAppianWay.png" />
@@ -51,19 +111,67 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\Cards\Academy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Cards\Altar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\Apothecary.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Cards\Aqueduct.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Arena.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Armory.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Arsenal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Cards\BackFirstEpoch.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\BackSecondEpoch.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\BackThirdEpoch.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Barracks.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\Baths.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\BookPublishing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Brewery.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\BrickWorkshop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\BuildersGuild.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Caravanserai.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Career.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Castle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\ChamberOfCommerce.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Circus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\ClayMine.png">
@@ -75,7 +183,31 @@
     <Resource Include="Images\Cards\ClaySupply.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Cards\Court.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Customs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Dispensary.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\DryingRoom.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Fortification.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Forum.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Gardens.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Cards\Garrison.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Glassblower.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\GlassWorkshop.png">
@@ -87,13 +219,58 @@
     <Resource Include="Images\Cards\Herbalist.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Cards\HorseBreeders.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\JudgesGuild.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Laboratory.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Library.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Lighthouse.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Cards\LumberCamp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\MerchantsGuild.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\MoneylendersGuild.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Obelisk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Observatories.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\Palisade.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Cards\Pantheon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Parade.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Port.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Cards\Quarry.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Sawmill.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\School.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\ScientistsGuild .png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\Scriptorium.png">
@@ -102,13 +279,34 @@
     <Resource Include="Images\Cards\SecurityTower.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Cards\SedimentationWorkshop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Senate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\ShipownersGuild.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\ShootingRange.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Cards\Stable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Statue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\StoneSupply.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Cards\Studios.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Cards\Tavern.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Temple.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\Theater.png">
@@ -117,13 +315,55 @@
     <Resource Include="Images\Cards\TimberFelling.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Cards\TownHall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Cards\Transparent.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Tribunal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Tribune.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\University.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\Walls.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cards\WarlordsGuild.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\WoodSupply.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\Workshop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Tokens\Agriculture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Tokens\Economy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Tokens\Law.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Tokens\Mathematics.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Tokens\Philosophy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Tokens\Strategy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Tokens\Theology.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Tokens\Urbanism.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Wonders\CircusMaximus.png">

@@ -12,15 +12,17 @@ namespace _7_Wonders.Models
         public bool SecondTurn { get; }
         public ComplexResource Complex { get; }
         public WonderEffect Effect { get; }
+        public string Hint { get; }
 
         private Wonder() {}
-        public Wonder(short warPoint, bool secondTurn, ComplexResource complex, WonderEffect effect, Resources cost, Resources reward, short fame, string name)
+        public Wonder(short warPoint, bool secondTurn, ComplexResource complex, WonderEffect effect, Resources cost, Resources reward, short fame, string name, string hint)
             : base(cost, reward, fame, name)
         {
             WarPoint = warPoint;
             SecondTurn = secondTurn;
             Complex = complex;
             Effect = effect;
+            Hint = hint;
         }
 
         public void GetProfit(Player player)
@@ -30,6 +32,11 @@ namespace _7_Wonders.Models
                  player.Resource[i] += Reward[i];
             }
             player.Fame += Fame;
+            player.WondersCount++;
+            if (player.WondersCount + player.Opponent.WondersCount == 7)
+            {
+                Game.WonderIsAvailable = false;
+            }
             if (player == Game.FirstPlayer)
             {
                 Game.WarPoints += WarPoint;
@@ -38,7 +45,7 @@ namespace _7_Wonders.Models
             {
                 Game.WarPoints -= WarPoint;
             }
-
+            Game.WarPunish();
             if (Game.WarPoints >= 9 || Game.WarPoints <= -9)
             {
                 Game.End(Game.GameEnding.War);

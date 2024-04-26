@@ -26,9 +26,26 @@ namespace _7_Wonders.Models
             }
             else
             {
-                player.ChosenToken.GetProfit(player);
+                int tokenCount = 5;
+                foreach (var token in Game.GameTokens)
+                {
+                    if (player.Tokens.Contains(token) || player.Opponent.Tokens.Contains(token)) 
+                    {
+                        tokenCount--;
+                    }
+                }
+                if (tokenCount > 0)
+                {
+                    player.ChosenToken.GetProfit(player);
+                }
             }
             player.GreenCards.Add(this);
+            int calcSymb = 0;
+            for (int i = 0; i < 7; i++)
+            {
+                if (player.Symbols[i]) calcSymb++;
+            }
+            if (calcSymb >= 6) Game.End(Game.GameEnding.Science);
         }
     }
 }

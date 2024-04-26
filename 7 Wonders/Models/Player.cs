@@ -26,13 +26,11 @@ namespace _7_Wonders.Models
         public Dictionary<Sale, bool> Sales { get; set; }
         public Dictionary<ComplexResource, byte> ComplexResources { get; set; }
         public Dictionary<BuildLink, bool> BuildLinks { get; set; }
+        public Dictionary<PurpleCard.Guild, bool> Guilds { get; set; }
         public List<Token> Tokens { get; set; }
         public Dictionary<Wonder, bool> Wonders { get; set; }
         public Player Opponent { get; set; }
-        public bool IsEconomy { get; set; }
-        public bool IsStrategy { get; set; }
-        public bool IsTheology { get; set; }
-        public bool IsUrbanism { get; set; }
+        public Dictionary<Token.TokenEffect, bool> TokenEffects { get; set; }
         public bool FirstDefeat { get; set; }
         public bool SecondDefeat { get; set; }
 
@@ -67,6 +65,16 @@ namespace _7_Wonders.Models
                 BuildLinks[(BuildLink)i] = false;
             }
             Tokens = new List<Token>();
+            TokenEffects = new Dictionary<Token.TokenEffect, bool>
+            {
+                {Token.TokenEffect.Economy, false }, {Token.TokenEffect.Math, false }, {Token.TokenEffect.Strategy, false },
+                {Token.TokenEffect.Theology, false }, {Token.TokenEffect.Urbanism, false }
+            };
+            Guilds = new Dictionary<PurpleCard.Guild, bool>
+            {
+                {PurpleCard.Guild.Gold, false }, {PurpleCard.Guild.Wonder, false }, {PurpleCard.Guild.Red, false}, {PurpleCard.Guild.Green, false},
+                {PurpleCard.Guild.Blue, false }, {PurpleCard.Guild.Resources, false}, {PurpleCard.Guild.Yellow, false}
+            };
         }
 
         public int CheckPrice(Building building)
@@ -160,7 +168,7 @@ namespace _7_Wonders.Models
                 throw new Exception("You can't buy this card!");
             }
             Resource.Gold -= (short)price;
-            if (Opponent.IsEconomy && price != 0)
+            if (Opponent.TokenEffects[Token.TokenEffect.Economy] && price != 0)
             {
                 Opponent.Resource.Gold += (short)(price - card.Cost.Gold);
             }
@@ -186,10 +194,17 @@ namespace _7_Wonders.Models
             }
 
             Resource.Gold -= (short)price;
+
+            if (Opponent.TokenEffects[Token.TokenEffect.Economy] && price != 0)
+            {
+                Opponent.Resource.Gold += (short)(price);
+            }
+
             wonder.GetProfit(this);
             Wonders[wonder] = true;
+            
             DeleteCard(card);
-            if (Game.CardNumber == 0 || (!wonder.SecondTurn && !IsTheology))
+            if (Game.CardNumber == 0 || (!wonder.SecondTurn && !TokenEffects[Token.TokenEffect.Theology]) || ChosenToken?.Effect == Token.TokenEffect.Theology)
             {
                 EndTurn();
             }
@@ -197,7 +212,7 @@ namespace _7_Wonders.Models
 
         public void DeleteCard(Card card)
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < Game.CardsList.Count; i++)
             {
                 if (Game.CardGraph[Game.CardsList[i]].Contains(card))
                 {

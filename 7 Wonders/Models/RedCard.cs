@@ -22,14 +22,14 @@ namespace _7_Wonders.Models
             if (player == Game.FirstPlayer)
             {
                 Game.WarPoints += WarPoint;
-                if (player.IsStrategy) Game.WarPoints++;
+                if (player.TokenEffects[Token.TokenEffect.Strategy]) Game.WarPoints++;
             }
             else
             {
                 Game.WarPoints -= WarPoint;
-                if (player.IsStrategy) Game.WarPoints--;
+                if (player.TokenEffects[Token.TokenEffect.Strategy]) Game.WarPoints--;
             }
-
+            Game.WarPunish();
             player.RedCards.Add(this);
 
             if (Game.WarPoints >= 10 || Game.WarPoints <= -10)

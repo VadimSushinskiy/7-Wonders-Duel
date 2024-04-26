@@ -10,6 +10,7 @@ namespace _7_Wonders.Models
         Pounder,
         Feather,
         Ruler,
-        Globe
+        Globe,
+        None
     }
 }
