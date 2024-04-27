@@ -33,12 +33,14 @@ namespace _7_Wonders.Models
         public Dictionary<Token.TokenEffect, bool> TokenEffects { get; set; }
         public bool FirstDefeat { get; set; }
         public bool SecondDefeat { get; set; }
+        public int WinningPoints { get; set; }
 
         private Player() {}
 
         public Player(string name)
         {
             Name = name;
+            WinningPoints = 0;
             Resource = new Resources() {Gold = 7};
             Symbols = new bool[7];
             Fame = 0;

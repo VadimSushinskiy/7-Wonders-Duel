@@ -54,7 +54,7 @@
     <None Remove="Images\Cards\Port.png" />
     <None Remove="Images\Cards\Sawmill.png" />
     <None Remove="Images\Cards\School.png" />
-    <None Remove="Images\Cards\ScientistsGuild .png" />
+    <None Remove="Images\Cards\ScientistsGuild.png" />
     <None Remove="Images\Cards\SedimentationWorkshop.png" />
     <None Remove="Images\Cards\Senate.png" />
     <None Remove="Images\Cards\ShipownersGuild.png" />
@@ -108,6 +108,10 @@
     <None Remove="Images\Wonders\TheTempleOfArtemis.png" />
     <None Remove="Images\WoodSupply.png" />
     <None Remove="Images\Workshop.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -270,7 +274,7 @@
     <Resource Include="Images\Cards\School.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Cards\ScientistsGuild .png">
+    <Resource Include="Images\Cards\ScientistsGuild.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cards\Scriptorium.png">

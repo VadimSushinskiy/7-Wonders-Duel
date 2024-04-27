@@ -12,6 +12,8 @@ namespace _7_Wonders.Models
         public static Player FirstPlayer { get; private set; }
         public static Player SecondPlayer { get; private set; }
         public static Player CurrentPlayer { get; set; }
+        public static Player Winner { get; set; }
+        public static GameEnding Ending { get; set; }
         public static int WarPoints { get; set; }
         public static byte Epoch { get; set; }
         public static int CardNumber { get; set; }
@@ -129,9 +131,10 @@ namespace _7_Wonders.Models
                 new PurpleCard(3, BuildLink.None, BuildLink.None, new Resources {Brick = 1, Stone = 2, Paper = 1}, new Resources(), 0, "WarlordsGuild", PurpleCard.Guild.Red)
             };
             Shuffle(guilds);
-            guilds.RemoveAt(6);
+            guilds.RemoveRange(3, 4);
             cards.AddRange(guilds);
-            AddCards(cards);
+            Shuffle(cards);
+            CardsList.AddRange(cards);
             WondersList = new List<Wonder>
             {
                 new Wonder(1, false, ComplexResource.None, Wonder.WonderEffect.StealGray, new Resources { Wood = 1, Stone = 2, Glass = 1}, new Resources(), 3, "CircusMaximus", "Негайно отримайте 1 Щит та 3 Слави. Ваш суперник скине обрану вами сіру карту" ),
@@ -192,6 +195,16 @@ namespace _7_Wonders.Models
                 {CardsList[34], new List<Card> {CardsList[37]} }, {CardsList[35], new List<Card> {CardsList[38]} },
                 {CardsList[36], new List<Card> {CardsList[38], CardsList[39] } }, {CardsList[37], new List<Card> {CardsList[39] } },
                 {CardsList[38], new List<Card>() }, {CardsList[39], new List<Card>() },
+                {CardsList[40], new List<Card> {CardsList[42], CardsList[43] } }, {CardsList[41], new List<Card> {CardsList[43], CardsList[44] } },
+                {CardsList[42], new List<Card> {CardsList[45], CardsList[46] } }, {CardsList[43], new List<Card> {CardsList[46], CardsList[47] } },
+                {CardsList[44], new List<Card> {CardsList[47], CardsList[48] } }, {CardsList[45], new List<Card> {CardsList[49] } },
+                {CardsList[46], new List<Card> {CardsList[49] } }, {CardsList[47], new List<Card> {CardsList[50] } },
+                {CardsList[48], new List<Card> {CardsList[50] } }, {CardsList[49], new List<Card> {CardsList[51], CardsList[52] } },
+                {CardsList[50], new List<Card> {CardsList[53], CardsList[54] } }, {CardsList[51], new List<Card> {CardsList[55] } },
+                {CardsList[52], new List<Card> {CardsList[55], CardsList[56] } }, {CardsList[53], new List<Card> {CardsList[56], CardsList[57] } },
+                {CardsList[54], new List<Card> {CardsList[57] } }, {CardsList[55], new List<Card> {CardsList[58] } },
+                {CardsList[56], new List<Card> {CardsList[58], CardsList[59] } }, {CardsList[57], new List<Card> {CardsList[59] } },
+                {CardsList[58], new List<Card>() }, {CardsList[59], new List<Card>() },
 
             };
             for (int i = 14; i < 20; i++)
@@ -200,6 +213,8 @@ namespace _7_Wonders.Models
             }
             CardsList[38].IsAvailable = true;
             CardsList[39].IsAvailable = true;
+            CardsList[58].IsAvailable = true;
+            CardsList[59].IsAvailable = true;
         }
 
         public static void Shuffle<T>(List<T> list)
@@ -256,9 +271,97 @@ namespace _7_Wonders.Models
             }
         }
 
+        public static void CalculateWinningPoints(Player player)
+        {
+            int points = 0;
+            points += player.Fame;
+            if (player == FirstPlayer)
+            {
+                if (WarPoints >= 6)
+                {
+                    points += 10;
+                }
+                else if (WarPoints >= 3)
+                {
+                    points += 5;
+                }
+                else if (WarPoints >= 1)
+                {
+                    points += 2;
+                }
+            }
+            else
+            {
+                if (WarPoints <= -6)
+                {
+                    points += 10;
+                }
+                else if (WarPoints <= -3)
+                {
+                    points += 5;
+                }
+                else if (WarPoints <= -1)
+                {
+                    points += 2;
+                }
+            }
+            points += player.Resource.Gold / 3;
+            if (player.TokenEffects[Token.TokenEffect.Math]) points += player.Tokens.Count * 3;
+            if (player.Guilds[PurpleCard.Guild.Wonder]) points += 2 * Math.Max(player.WondersCount, player.Opponent.WondersCount);
+            if (player.Guilds[PurpleCard.Guild.Gold]) points += Math.Max(player.Resource.Gold / 3, player.Opponent.Resource.Gold / 3);
+            if (player.Guilds[PurpleCard.Guild.Green]) points += Math.Max(player.GreenCards.Count, player.Opponent.GreenCards.Count);
+            if (player.Guilds[PurpleCard.Guild.Red]) points += Math.Max(player.RedCards.Count, player.Opponent.RedCards.Count);
+            if (player.Guilds[PurpleCard.Guild.Yellow]) points += Math.Max(player.YellowCards.Count, player.Opponent.YellowCards.Count);
+            if (player.Guilds[PurpleCard.Guild.Blue]) points += Math.Max(player.BlueCards.Count, player.Opponent.BlueCards.Count);
+            if (player.Guilds[PurpleCard.Guild.Resources]) points += Math.Max(player.BrownCards.Count + player.GrayCards.Count, player.Opponent.BrownCards.Count + player.Opponent.GrayCards.Count);
+            player.WinningPoints = points;
+            
+        }
+
         public static void End(GameEnding ending)
         {
-            //TODO
+            Ending = ending;
+            switch (ending)
+            {
+                case GameEnding.Science:
+                {
+                    int countSymbols = 0;
+                    for (int i = 0; i < FirstPlayer.Symbols.Length; i++)
+                    {
+                        if (FirstPlayer.Symbols[i]) countSymbols++; 
+                    }
+                    if (countSymbols >= 6)
+                    {
+                        Winner = FirstPlayer;
+                    }
+                    else
+                    {
+                        Winner = SecondPlayer;
+                    }
+                    break;
+                }
+                case GameEnding.War:
+                {
+                    if (WarPoints >= 9)
+                    {
+                        Winner = FirstPlayer;
+                    }
+                    else
+                    {
+                        Winner = SecondPlayer;
+                    }
+                    break;
+                }
+                case GameEnding.Standard:
+                    {
+                        CalculateWinningPoints(FirstPlayer);
+                        CalculateWinningPoints(SecondPlayer);
+                        if (FirstPlayer.WinningPoints > SecondPlayer.WinningPoints) Winner = FirstPlayer;
+                        else if (SecondPlayer.WinningPoints > FirstPlayer.WinningPoints) Winner = SecondPlayer;
+                        break;
+                    }
+            }
+            Epoch = 4;
         }
 
         public enum GameEnding

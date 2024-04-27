@@ -9,6 +9,9 @@
     <Window.DataContext>
         <local:GameViewModel></local:GameViewModel>
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding QiutCommand}"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="145"></RowDefinition>
@@ -32,7 +35,10 @@
                     <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Brick, StringFormat=Brick:&#x0d;&#x0a; {0}}"/>
                     <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Stone, StringFormat=Stone:&#x0d;&#x0a; {0}}"/>
                     <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Wood, StringFormat=Wood:&#x0d;&#x0a; {0}}"/>
-                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Gold, StringFormat=Gold:&#x0d;&#x0a; {0}}"/>
+                    <StackPanel>
+                        <Button Height="45" Background="Red" Content="*" FontSize="46" Command="{Binding QiutCommand}"/>
+                        <TextBox Style="{StaticResource ResourceButtonTemplate}" Height="55" Text="{Binding SecondResources.Gold, StringFormat=Gold:&#x0d;&#x0a; {0}}"/>
+                    </StackPanel>
                 </StackPanel>
                 <TextBox Style="{StaticResource ResourceButtonTemplate}" DockPanel.Dock="Left" Width="125" BorderThickness="0" Text="{Binding War, StringFormat=War Points:&#x0d;&#x0a; {0}}"/>
                 <TextBox Style="{StaticResource ResourceButtonTemplate}" DockPanel.Dock="Right" Width="125" BorderThickness="0" Text="{Binding War, StringFormat=War Points:&#x0d;&#x0a; {0}}"/>
@@ -67,7 +73,6 @@
             <DockPanel Width="1920" DockPanel.Dock="Top">
                 <TextBox DockPanel.Dock="Left" FontSize="32" Text="{Binding FirstPlayerName}" Foreground="{Binding NameColors[0]}" IsReadOnly="True"/>
                 <TextBox DockPanel.Dock="Right" FontSize="32" Text="{Binding SecondPlayerName}" Foreground="{Binding NameColors[1]}" IsReadOnly="True"/>
-                <Button Content="Start Game!" Visibility="{Binding StartButtonVisibility}" Height="50" Width="300" Command="{Binding ShuffleCommand}"/>
                 <Border BorderBrush="{Binding PeekColor}" BorderThickness="3" DockPanel.Dock="Right">
                     <Button Content="Око" FontSize="20" Command="{Binding PeekCommand}"/>
                 </Border>
@@ -530,122 +535,122 @@
                         </Image.InputBindings>
                     </Image>
                 </Canvas>
-                <Canvas>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[40]}" Canvas.Bottom="470" Canvas.Left="500">
+                <Canvas Visibility="{Binding EpochVisibility[2]}">
+                    <Image Source="{Binding CardsName[40]}" Visibility="{Binding CardsVisibility[40]}" Canvas.Bottom="470" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="40"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="40"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[41]}" Canvas.Bottom="470" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[41]}" Visibility="{Binding CardsVisibility[41]}" Canvas.Bottom="470" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="41"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="41"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[42]}" Canvas.Bottom="400" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[42]}" Visibility="{Binding CardsVisibility[42]}" Canvas.Bottom="390" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="42"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="42"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[43]}" Canvas.Bottom="400" Canvas.Left="600">
+                    <Image Source="{Binding CardsName[43]}" Visibility="{Binding CardsVisibility[43]}" Canvas.Bottom="390" Canvas.Left="600">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="43"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="43"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[44]}" Canvas.Bottom="400" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[44]}" Visibility="{Binding CardsVisibility[44]}" Canvas.Bottom="390" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="44"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="44"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[45]}" Canvas.Bottom="330" Canvas.Left="300">
+                    <Image Source="{Binding CardsName[45]}" Visibility="{Binding CardsVisibility[45]}" Canvas.Bottom="320" Canvas.Left="300">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="45"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="45"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[46]}" Canvas.Bottom="330" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[46]}" Visibility="{Binding CardsVisibility[46]}" Canvas.Bottom="320" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="46"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="46"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[47]}" Canvas.Bottom="330" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[47]}" Visibility="{Binding CardsVisibility[47]}" Canvas.Bottom="320" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="47"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="47"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[48]}" Canvas.Bottom="330" Canvas.Left="900">
+                    <Image Source="{Binding CardsName[48]}" Visibility="{Binding CardsVisibility[48]}" Canvas.Bottom="320" Canvas.Left="900">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="48"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="48"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[49]}" Canvas.Bottom="260" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[49]}" Visibility="{Binding CardsVisibility[49]}" Canvas.Bottom="250" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="49"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="49"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[50]}" Canvas.Bottom="260" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[50]}" Visibility="{Binding CardsVisibility[50]}" Canvas.Bottom="250" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="50"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="50"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[51]}" Canvas.Bottom="190" Canvas.Left="300">
+                    <Image Source="{Binding CardsName[51]}" Visibility="{Binding CardsVisibility[51]}" Canvas.Bottom="180" Canvas.Left="300">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="51"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="51"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[52]}" Canvas.Bottom="190" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[52]}" Visibility="{Binding CardsVisibility[52]}" Canvas.Bottom="180" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="52"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="52"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[53]}" Canvas.Bottom="190" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[53]}" Visibility="{Binding CardsVisibility[53]}" Canvas.Bottom="180" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="53"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="53"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[54]}" Canvas.Bottom="190" Canvas.Left="900">
+                    <Image Source="{Binding CardsName[54]}" Visibility="{Binding CardsVisibility[54]}" Canvas.Bottom="180" Canvas.Left="900">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="54"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="54"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[55]}" Canvas.Bottom="120" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[55]}" Visibility="{Binding CardsVisibility[55]}" Canvas.Bottom="110" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="55"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="55"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[56]}" Canvas.Bottom="120" Canvas.Left="600">
+                    <Image Source="{Binding CardsName[56]}" Visibility="{Binding CardsVisibility[56]}" Canvas.Bottom="110" Canvas.Left="600">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="56"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="56"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[57]}" Canvas.Bottom="120" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[57]}" Visibility="{Binding CardsVisibility[57]}" Canvas.Bottom="110" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="57"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="57"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[58]}" Canvas.Bottom="50" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[58]}" Visibility="{Binding CardsVisibility[58]}" Canvas.Bottom="40" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="58"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="58"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="Images/Cards/Academy.png" Visibility="{Binding CardsVisibility[59]}" Canvas.Bottom="50" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[59]}" Visibility="{Binding CardsVisibility[59]}" Canvas.Bottom="40" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="59"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="59"/>
@@ -951,5 +956,96 @@
                 </Image.InputBindings>
             </Image>
         </WrapPanel>
+        <Grid Grid.Row="0" Grid.RowSpan="2" Width="1920" Height="1080" Background="AliceBlue" Visibility="{Binding EpochVisibility[3]}">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock FontSize="44" Foreground="{Binding WinColor}" FontWeight="Bold" Text="{Binding WinType}"/>
+                <TextBlock FontSize="44" Foreground="{Binding WinColor}" FontWeight="Bold" Text="{Binding WinnerName, StringFormat=Переможець: {0}}"/>
+                <Button Content="Реванш" Width="200" Height="100" Command="{Binding RestartCommand}"/>
+            </StackPanel>
+            <Canvas Visibility="{Binding StatisticVisibility}">
+                <StackPanel Canvas.Top="100" Canvas.Left="30">
+                    <DockPanel>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerName}" DockPanel.Dock="Left"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Сині карти:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerWinPoints[0]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Зелені карти:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerWinPoints[1]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Жовті карти:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerWinPoints[2]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Карти гільдій:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerWinPoints[3]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Дива:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerWinPoints[4]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Жетони:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerWinPoints[5]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Золото:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerWinPoints[6]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Війна:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerWinPoints[7]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Разом:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding FirstPlayerWinPoints[8]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Canvas.Top="100" Canvas.Right="30">
+                    <DockPanel>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerName}" DockPanel.Dock="Left"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Сині карти:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[0]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Зелені карти:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[1]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Жовті карти:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[2]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Карти гільдій:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[3]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Дива:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[4]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Жетони:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[5]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Золото:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[6]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Війна:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[7]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="False">
+                        <TextBlock FontSize="44" Text="Разом:" DockPanel.Dock="Left"/>
+                        <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[8]}" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                </StackPanel>
+            </Canvas>
+        </Grid>
     </Grid>
 </Window>
