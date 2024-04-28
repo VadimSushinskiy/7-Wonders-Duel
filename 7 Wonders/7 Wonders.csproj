@@ -76,6 +76,10 @@
     <None Remove="Images\GlassWorkshop.png" />
     <None Remove="Images\GraniteQuarry.png" />
     <None Remove="Images\Herbalist.png" />
+    <None Remove="Images\Interface\bg-game.jpg" />
+    <None Remove="Images\Interface\bg-menu.jpg" />
+    <None Remove="Images\Interface\bg-menu.png" />
+    <None Remove="Images\Interface\cross.png" />
     <None Remove="Images\LumberCamp.png" />
     <None Remove="Images\Palisade.png" />
     <None Remove="Images\Quarry.png" />
@@ -108,6 +112,8 @@
     <None Remove="Images\Wonders\TheTempleOfArtemis.png" />
     <None Remove="Images\WoodSupply.png" />
     <None Remove="Images\Workshop.png" />
+    <None Remove="Music\GameMusic.mp3" />
+    <None Remove="Music\MenuMusic.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -346,6 +352,15 @@
     <Resource Include="Images\Cards\Workshop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Interface\bg-game.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Interface\bg-menu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Interface\cross.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Tokens\Agriculture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -406,6 +421,12 @@
     <Resource Include="Images\Wonders\TheTempleOfArtemis.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Music\GameMusic.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Music\MenuMusic.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

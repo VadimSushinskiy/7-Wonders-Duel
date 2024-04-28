@@ -32,7 +32,7 @@ namespace _7_Wonders.Models
             Game.WarPunish();
             player.RedCards.Add(this);
 
-            if (Game.WarPoints >= 10 || Game.WarPoints <= -10)
+            if (Game.WarPoints >= 9 || Game.WarPoints <= -9)
             {
                 Game.End(Game.GameEnding.War);
             }

@@ -10,7 +10,7 @@
         <local:GameViewModel></local:GameViewModel>
     </Window.DataContext>
     <Window.InputBindings>
-        <KeyBinding Key="Esc" Command="{Binding QiutCommand}"/>
+        <KeyBinding Key="Esc" Command="{Binding ChangeMenuViewCommand}"/>
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -36,7 +36,7 @@
                     <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Stone, StringFormat=Stone:&#x0d;&#x0a; {0}}"/>
                     <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Wood, StringFormat=Wood:&#x0d;&#x0a; {0}}"/>
                     <StackPanel>
-                        <Button Height="45" Background="Red" Content="*" FontSize="46" Command="{Binding QiutCommand}"/>
+                        <Button Height="45" Background="Red" Content="*" FontSize="46" Command="{Binding ChangeMenuViewCommand}"/>
                         <TextBox Style="{StaticResource ResourceButtonTemplate}" Height="55" Text="{Binding SecondResources.Gold, StringFormat=Gold:&#x0d;&#x0a; {0}}"/>
                     </StackPanel>
                 </StackPanel>
@@ -1045,6 +1045,24 @@
                         <TextBlock FontSize="44" Text="{Binding SecondPlayerWinPoints[8]}" DockPanel.Dock="Right"/>
                     </DockPanel>
                 </StackPanel>
+            </Canvas>
+        </Grid>
+        <Grid Grid.Row="0" Grid.RowSpan="2" Background="#3F000000" Visibility="{Binding MenuVisibility, Converter={StaticResource BoolToVis}}">
+            <Grid Width="350" Height="450" Background="BurlyWood" Visibility="{Binding MenuSettingVisibility[0], Converter={StaticResource BoolToVis}}">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button Width="250" Height="70" Content="Назад" Margin="0 0 0 50" FontSize="32" Command="{Binding ChangeMenuViewCommand}"/>
+                    <Button Width="250" Height="70" Content="Налаштування" Margin="0 0 0 50" FontSize="32" Command="{Binding ShowSettingsCommand}"/>
+                    <Button Width="250" Height="70" Content="Вийти" FontSize="32" Click="Button_Click" Command="{Binding QiutCommand}"/>
+                </StackPanel>
+            </Grid>
+            <Canvas Width="700" Height="300" Background="BurlyWood" Visibility="{Binding MenuSettingVisibility[1], Converter={StaticResource BoolToVis}}">
+                <Button Content="Назад" FontSize="24" Width="200" Height="70" Command="{Binding ChangeMenuViewCommand}"/>
+                <Label FontSize="32" Canvas.Top="125" Foreground="White" Canvas.Left="220">Вимкнути звук</Label>
+                <CheckBox Canvas.Left="450" Canvas.Top="141" IsChecked="{Binding IsMuted}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
             </Canvas>
         </Grid>
     </Grid>

@@ -25,6 +25,8 @@ namespace _7_Wonders
         public RelayCommand GoCommand { get; set; }
         public RelayCommand LogInCommand { get; set; }
         public RelayCommand RegisterCommand { get; set; }
+        public RelayCommand NextPageCommand { get; set; }
+        public RelayCommand PreviousPageCommand { get; set; }
 
         private string _help;
         public string Help
@@ -36,6 +38,8 @@ namespace _7_Wonders
                 OnPropertyChanged(nameof(Help));
             }
         }
+        private int _pageNum;
+        public bool[] Pages { get; set; }
 
         private string _firstPlayerName;
         public string FirstPlayerName 
@@ -80,6 +84,16 @@ namespace _7_Wonders
                 OnPropertyChanged(nameof(Password));
             }
         }
+        private bool _isMuted = true;
+        public bool IsMuted
+        {
+            get => _isMuted;
+            set
+            {
+                _isMuted = value;
+                OnPropertyChanged(nameof(IsMuted));
+            }
+        }
         public List<GameResults> GameResultsList { get; set; }
 
         public ObservableCollection<Visibility> PageVisibility { get; set; }
@@ -98,8 +112,11 @@ namespace _7_Wonders
         {
             FirstPlayerName = "Player1";
             SecondPlayerName = "Player2";
-            PageVisibility = new ObservableCollection<Visibility> {Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed };
+            _pageNum = 0;
+            Pages = [true, false, false];
+            PageVisibility = new ObservableCollection<Visibility> {Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed };
             PageVisibility[Mediator.PageId] = Visibility.Visible;
+            IsMuted = Mediator.IsMuted;
             Mediator.PageId = 0;
             Login = Mediator.Login;
             GameResultsList = new();
@@ -109,7 +126,6 @@ namespace _7_Wonders
 
             if (!Login.IsNullOrEmpty())
             {
-                GameResultsList = db.GameResults.Where(u => u.UserId == Mediator.UserId).ToList();
                 GameResultsList = db.GameResults.Where(u => u.UserId == Mediator.UserId).ToList();
             }
             LogInCommand = new RelayCommand(obj =>
@@ -124,7 +140,9 @@ namespace _7_Wonders
                     PageVisibility[0] = Visibility.Collapsed;
                     PageVisibility[2] = Visibility.Visible;
                     Help = "";
-                    Mediator.UserId = db.Users.FirstOrDefault(u => u.Login == Login.Trim()).Id;
+                    Mediator.UserId = user.Id;
+                    Mediator.IsMuted = user.IsSoundMuted;
+                    IsMuted = user.IsSoundMuted;
                     GameResultsList = db.GameResults.Where(u => u.UserId == Mediator.UserId).ToList();
                     OnPropertyChanged(nameof(GameResultsList));
                     OnPropertyChanged(nameof(PageVisibility));
@@ -141,12 +159,14 @@ namespace _7_Wonders
                 }
                 else
                 {
-                    db.Users.Add(new User { Login = Login.Trim(), Password = Password.Trim() });
+                    db.Users.Add(new User { Login = Login.Trim(), Password = Password.Trim(), IsSoundMuted = false });
                     db.SaveChanges();
                     PageVisibility[1] = Visibility.Collapsed;
                     PageVisibility[2] = Visibility.Visible;
                     Help = "";
                     GameResultsList = db.GameResults.ToList();
+                    IsMuted = false;
+                    Mediator.IsMuted = false;
                     Mediator.UserId = db.Users.FirstOrDefault(u => u.Login == Login.Trim()).Id;
                     OnPropertyChanged(nameof(GameResultsList));
                     OnPropertyChanged(nameof(PageVisibility));
@@ -160,6 +180,7 @@ namespace _7_Wonders
                 Mediator.FirstPlayerName = FirstPlayerName.Trim();
                 Mediator.SecondPlayerName = SecondPlayerName.Trim();
                 Mediator.Login = Login.Trim();
+                
                 OnOpenWindow();
             }, obj =>
             {
@@ -179,13 +200,43 @@ namespace _7_Wonders
                 {
                     Login = "";
                     Password = "";
+                    IsMuted = true;
                 }
                 else if (idx == 2)
                 {
                     FirstPlayerName = "Player1";
                     SecondPlayerName = "Player2";
                 }
+                if (IsMuted != Mediator.IsMuted && idx != 0 && idx != 1)
+                {
+                    Mediator.IsMuted = IsMuted;
+                    User user = db.Users.FirstOrDefault(u => u.Id == Mediator.UserId);
+                    user.IsSoundMuted = IsMuted;
+                    db.SaveChanges();
+                }
                 OnPropertyChanged(nameof(PageVisibility));
+            });
+            NextPageCommand = new RelayCommand(obj =>
+            {
+                Pages[_pageNum] = false;
+                _pageNum++;
+                if (_pageNum >= Pages.Length)
+                {
+                    _pageNum = 0;
+                }
+                Pages[_pageNum] = true;
+                OnPropertyChanged(nameof(Pages));
+            });
+            PreviousPageCommand = new RelayCommand(obj =>
+            {
+                Pages[_pageNum] = false;
+                _pageNum--;
+                if (_pageNum < 0)
+                {
+                    _pageNum = Pages.Length - 1;
+                }
+                Pages[_pageNum] = true;
+                OnPropertyChanged(nameof(Pages));
             });
         }
 

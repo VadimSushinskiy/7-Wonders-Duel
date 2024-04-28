@@ -8,7 +8,8 @@
         Title="Menu" Height="1080" Width="1920"
         WindowState="Maximized" WindowStyle="None">
     <Grid>
-        <Canvas Background="AliceBlue" Visibility="{Binding PageVisibility[0]}">
+        <Image Source="../Images/Interface/bg-menu.png" Width="1920" Height="1080" Stretch="Fill"/>
+        <Canvas Visibility="{Binding PageVisibility[0]}">
             <TextBlock Text="{Binding Help}" Canvas.Top="200" FontSize="32" Width="1920" TextAlignment="Center" Foreground="Red"/>
             <DockPanel Canvas.Left="700" Canvas.Top="400" LastChildFill="False">
                 <Label FontSize="32" DockPanel.Dock="Left" Width="300">Введіть логін:</Label>
@@ -33,7 +34,7 @@
                 <KeyBinding Key="Enter" Command="{Binding LogInCommand}"/>
             </Canvas.InputBindings>
         </Canvas>
-        <Canvas Background="AliceBlue" Visibility="{Binding PageVisibility[1]}">
+        <Canvas Visibility="{Binding PageVisibility[1]}">
             <TextBlock Text="{Binding Help}" Canvas.Top="200" FontSize="32" Width="1920" TextAlignment="Center" Foreground="Red"/>
             <DockPanel Canvas.Left="700" Canvas.Top="400" LastChildFill="False">
                 <Label FontSize="32" DockPanel.Dock="Left" Width="350">Придумайте логін:</Label>
@@ -51,12 +52,15 @@
             </Canvas.InputBindings>
         </Canvas>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding PageVisibility[2]}">
-            <Button Content="Нова гра" FontSize="24" Width="200" Height="70" Margin="0, 0, 0, 10" Command="{Binding GoCommand}" CommandParameter="3"/>
-            <Button Content="Історія ігр" FontSize="24" Width="200" Height="70" Margin="0, 0, 0, 10" Command="{Binding GoCommand}" CommandParameter="4"/>
-            <Button Content="Вийти з акаунту" FontSize="24" Width="200" Height="70" Margin="0, 0, 0, 10" Command="{Binding GoCommand}" CommandParameter="0"/>
-            <Button Content="Вийти" FontSize="24" Width="200" Height="70" Command="{Binding CloseWindowCommand}"/>
+            <Button Content="Нова гра" Style="{StaticResource MenuButton}" CommandParameter="3"/>
+            <Button Content="Навчання" Style="{StaticResource MenuButton}" CommandParameter="3"/>
+            <Button Content="Налаштування" Style="{StaticResource MenuButton}" CommandParameter="5"/>
+            <Button Content="Галерея" Style="{StaticResource MenuButton}" CommandParameter="6"/>
+            <Button Content="Історія ігор" Style="{StaticResource MenuButton}" CommandParameter="4"/>
+            <Button Content="Вийти з акаунту" Style="{StaticResource MenuButton}" CommandParameter="0"/>
+            <Button Content="Вийти" Style="{StaticResource MenuButton}" Command="{Binding CloseWindowCommand}"/>
         </StackPanel>
-        <Canvas Background="AliceBlue" Visibility="{Binding PageVisibility[3]}">
+        <Canvas Visibility="{Binding PageVisibility[3]}">
             <DockPanel Canvas.Left="600" Canvas.Top="400" LastChildFill="False">
                 <Label FontSize="32" DockPanel.Dock="Left" Width="450">Введіть ім'я першого гравця:</Label>
                 <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding FirstPlayerName, UpdateSourceTrigger=PropertyChanged}"/>
@@ -65,7 +69,7 @@
                 <Label FontSize="32" DockPanel.Dock="Left" Width="450">Введіть ім'я другого гравця:</Label>
                 <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding SecondPlayerName, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
-            <Button Canvas.Left="850" Canvas.Top="600" Width="200" Height="70" FontSize="24" Content="Підтвердити" Command="{Binding StartCommand}"/>
+            <Button Canvas.Left="850" Canvas.Top="600" Width="200" Height="70" FontSize="24" Content="Підтвердити" Click="Button_Click" Command="{Binding StartCommand}"/>
             <Button Width="200" Height="70" FontSize="24" Content="Повернутись" Command="{Binding GoCommand}" CommandParameter="2"/>
             <Canvas.InputBindings>
                 <KeyBinding Key="Esc" Command="{Binding GoCommand}" CommandParameter="2"/>
@@ -74,11 +78,11 @@
         </Canvas>
         <Grid Background="AliceBlue" Visibility="{Binding PageVisibility[4]}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
                 <RowDefinition/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
-            <Button Content="Повернутись" FontSize="32" Command="{Binding GoCommand}" CommandParameter="2"/>
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False" FontSize="32" ItemsSource="{Binding GameResultsList}" IsReadOnly="True" GridLinesVisibility="None" RowBackground="AliceBlue">
+            <Button Grid.Row="1" Content="Повернутись" FontSize="32" Command="{Binding GoCommand}" CommandParameter="2"/>
+            <DataGrid Grid.Row="0" ColumnHeaderHeight="64" AutoGenerateColumns="False" FontSize="32" ItemsSource="{Binding GameResultsList}" IsReadOnly="True" GridLinesVisibility="None" RowBackground="AliceBlue">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Перший гравець" Binding="{Binding FirstPlayerName}"/>
@@ -91,5 +95,110 @@
                 <KeyBinding Key="Esc" Command="{Binding GoCommand}" CommandParameter="2"/>
             </Grid.InputBindings>
         </Grid>
+        <Canvas Width="700" Height="300" Background="BurlyWood" Visibility="{Binding PageVisibility[5]}">
+            <Button Content="Назад" Style="{StaticResource MenuButton}" CommandParameter="2"/>
+            <Label FontSize="32" Canvas.Top="125" Foreground="White" Canvas.Left="220">Вимкнути звук</Label>
+            <CheckBox Canvas.Left="450" Canvas.Top="141" IsChecked="{Binding IsMuted}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Canvas>
+        <Grid Background="BurlyWood" Visibility="{Binding PageVisibility[6]}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="926"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Тут ви можете переглянути всі карти. При наведенні на них ви побачите короткий опис" FontSize="32" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Width="200" FontSize="28" HorizontalAlignment="Left" Content="Назад" Command="{Binding GoCommand}" CommandParameter="2"/>
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Pages[0], Converter={StaticResource BoolToVis}}">
+                <Image Source="../Images/Cards/ClayMine.png" Width="190" ToolTip="1 Епоха. Безкоштовна. Отримайте 1 Цеглу"/>
+                <Image Source="../Images/Cards/ClayQuarry.png" Width="190" ToolTip="1 Епоха. Заплатіть 1 Золото. Отримайте 1 Цеглу"/>
+                <Image Source="../Images/Cards/GraniteQuarry.png" Width="190" ToolTip="1 Епоха. Заплатіть 1 Золото. Отримайте 1 Камінь"/>
+                <Image Source="../Images/Cards/LumberCamp.png" Width="190"  ToolTip="1 Епоха. Заплатіть 1 Золото. Отримайте 1 Дерево"/>
+                <Image Source="../Images/Cards/Quarry.png" Width="190"  ToolTip="1 Епоха. Безкоштовна. Отримайте 1 Камінь"/>
+                <Image Source="../Images/Cards/TimberFelling.png" Width="190"  ToolTip="1 Епоха. Безкоштовна. Отримайте 1 Дерево"/>
+                <Image Source="../Images/Cards/BrickWorkshop.png" Width="190"  ToolTip="2 Епоха. Заплатіть 2 Золота. Отримайте 2 Цегли"/>
+                <Image Source="../Images/Cards/Career.png" Width="190"  ToolTip="2 Епоха. Заплатіть 2 Золото. Отримайте 2 Каменю"/>
+                <Image Source="../Images/Cards/Sawmill.png" Width="190"  ToolTip="2 Епоха. Заплатіть 2 Золото. Отримайте 2 Дерева"/>
+                <Image Source="../Images/Cards/BookPublishing.png" Width="190"  ToolTip="1 Епоха. Заплатіть 1 Золото. Отримайте 1 Папір"/>
+                <Image Source="../Images/Cards/GlassWorkshop.png" Width="190"  ToolTip="1 Епоха. Заплатіть 1 Золото. Отримайте 1 Скло"/>
+                <Image Source="../Images/Cards/DryingRoom.png" Width="190"  ToolTip="2 Епоха. Безкоштовна. Отримайте 1 Папір"/>
+                <Image Source="../Images/Cards/Glassblower.png" Width="190"  ToolTip="2 Епоха. Безкоштовна. Отримайте 1 Скло"/>
+                <Image Source="../Images/Cards/Altar.png" Width="190"  ToolTip="1 Епоха. Безкоштовна. Отримайте 3 Слави та зв'язок 'Місяць'"/>
+                <Image Source="../Images/Cards/Baths.png" Width="190" ToolTip="1 Епоха. Заплатыть 1 Камінь. Отримайте 3 Слави та зв'язок 'Вода'"/>
+                <Image Source="../Images/Cards/Theater.png" Width="190" ToolTip="1 Епоха. Безкоштовна. Отримайте 3 Слави та зв'язок 'Маска'"/>
+                <Image Source="../Images/Cards/Aqueduct.png" Width="190" ToolTip="2 Епоха. Заплатіть 3 Каменя або майте зв'язок 'Вода'. Отримайте 5 Слави"/>
+                <Image Source="../Images/Cards/Statue.png" Width="190" ToolTip="2 Епоха. Заплатіть 2 Цегли або майте зв'язок 'Маска'. Отримайте 4 Слави та зв'язок 'Колона'"/>
+                <Image Source="../Images/Cards/Temple.png" Width="190" ToolTip="2 Епоха. Заплатіть 1 Камінь та 1 Папір або майте зв'язок 'Місяць'. Отримайте 4 Слави та зв'язок 'Сонце'"/>
+                <Image Source="../Images/Cards/Tribunal.png" Width="190" ToolTip="2 Епоха. Заплатіть 2 Дерева та 1 Скло. Отримайте 5 Слави"/>
+                <Image Source="../Images/Cards/Tribune.png" Width="190" ToolTip="2 Епоха. Заплатіть 1 Камінь та 1 Дерево. Отримайте 4 Слави та зв'язок 'Трибуна'"/>
+                <Image Source="../Images/Cards/Castle.png" Width="190" ToolTip="3 Епоха. Заплатіть 1 Цеглу, 1 Камінь, 1 Дерево та 2 Скла. Отримайте 7 Слави"/>
+                <Image Source="../Images/Cards/Gardens.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Цегли та 2 Дерева або майте зв'язок 'Колона'. Отримайте 6 Слави"/>
+                <Image Source="../Images/Cards/Obelisk.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Каменя та 1 Скло. Отримайте 5 Слави"/>
+                <Image Source="../Images/Cards/Pantheon.png" Width="190" ToolTip="3 Епоха. Заплатіть 1 Цеглу, 1 Дерево та 2 Папіра або майте зв'язок 'Сонце'. Отримайте 6 Слави"/>
+                <Image Source="../Images/Cards/Senate.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Цегли, 1 Камінь та 1 Папір або майте зв'язок 'Сенат'. Отримайте 5 Слави"/>
+                <Image Source="../Images/Cards/TownHall.png" Width="190" ToolTip="3 Епоха. Заплатіть 3 Каменя та 2 Дерева. Отримайте 7 Слави"/>
+                <Image Source="../Images/Cards/Apothecary.png" Width="190" ToolTip="1 Епоха. Заплатіть 2 Золота. Отримайте Науковий Символ та зв'язок 'Шестерня'"/>
+                <Image Source="../Images/Cards/Herbalist.png" Width="190" ToolTip="1 Епоха. Заплатіть 1 Скло. Отримайте 1 Славу та Науковий Символ"/>
+                <Image Source="../Images/Cards/Scriptorium.png" Width="190" ToolTip="1 Епоха. Заплатіть 2 Золота. Отримайте Науковий Символ та зв'язок 'Книга'"/>
+
+            </WrapPanel>
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Pages[1], Converter={StaticResource BoolToVis}}">
+                <Image Source="../Images/Cards/Workshop.png" Width="190" ToolTip="1 Епоха. Заплатіть 1 Папір. Отримайте 1 Славу та Науковий Символ"/>
+                <Image Source="../Images/Cards/Dispensary.png" Width="190" ToolTip="2 Епоха. Заплатіть 2 Цегли та 1 Камінь або майте зв'язок 'Шестерня'. Отримайте 2 Слави та Науковий Символ"/>
+                <Image Source="../Images/Cards/Laboratory.png" Width="190" ToolTip="2 Епоха. Заплатіть 1 Дерево та 2 Скла. Отримайте 1 Славу, Науковий Символ та зв'язок 'Лампа'"/>
+                <Image Source="../Images/Cards/Library.png" Width="190" ToolTip="2 Епоха. Заплатіть 1 Камінь, 1 Дерево та 1 Скло або майте зв'язок 'Книга'. Отримайте 2 Слави та Науковий Символ"/>
+                <Image Source="../Images/Cards/School.png" Width="190"  ToolTip="2 Епоха. Заплатіть 1 Дерево та 2 Папіра. Отримайте 1 Славу, Науковий Символ та зв'язок 'Арфа'"/>
+                <Image Source="../Images/Cards/Academy.png" Width="190"  ToolTip="3 Епоха. Заплатіть 1 Камінь, 1 Дерево та 2 Скла. Отримайте 3 Слави та Науковий Символ"/>
+                <Image Source="../Images/Cards/Observatories.png" Width="190"  ToolTip="3 Епоха. Заплатіть 1 Камінь та 2 Папіра або майте зв'язок 'Лампа'. Отримайте 2 Слави та Науковий Символ"/>
+                <Image Source="../Images/Cards/Studios.png" Width="190"  ToolTip="3 Епоха. Заплатіть 3 Дерева, 1 Скло та 1 Папір. Отримайте 3 Слави та Науковий Символ"/>
+                <Image Source="../Images/Cards/University.png" Width="190"  ToolTip="3 Епоха. Заплатіть 1 Цеглу, 1 Скло та 1 Папір або майте зв'язок 'Арфа'. Отримайте 2 Слави та Науковий Символ"/>
+                <Image Source="../Images/Cards/Garrison.png" Width="190"  ToolTip="1 Епоха. Заплатіть 1 Цеглу. Отримайте 1 Щит та зв'язок 'Меч'"/>
+                <Image Source="../Images/Cards/Palisade.png" Width="190"  ToolTip="1 Епоха. Заплатіть 2 Золота. Отримайте 1 Щит та зв'язок 'Вежа'"/>
+                <Image Source="../Images/Cards/SecurityTower.png" Width="190"  ToolTip="1 Епоха. Безкоштовна. Отримайте 1 Щит"/>
+                <Image Source="../Images/Cards/Stable.png" Width="190"  ToolTip="1 Епоха. Заплатіть 1 Дерево. Отримайте 1 Щит та зв'язок 'Підкова'"/>
+                <Image Source="../Images/Cards/Barracks.png" Width="190"  ToolTip="2 Епоха. Заплатіть 3 Золота або майте зв'язок 'Меч'. Отримайте 1 Щит"/>
+                <Image Source="../Images/Cards/HorseBreeders.png" Width="190"  ToolTip="2 Епоха. Заплатіть 1 Цеглу та 1 Дерево або майте зв'язок 'Підкова'. Отримайте 1 Щит"/>
+                <Image Source="../Images/Cards/Parade.png" Width="190" ToolTip="2 Епоха. Заплатіть 2 Цегли та 1 Скло. Отримайте 2 Щита та зв'язок 'Шолом'"/>
+                <Image Source="../Images/Cards/ShootingRange.png" Width="190" ToolTip="2 Епоха. Заплатіть 1 Камінь, 1 Дерево та 1 Папір. Отримайте 2 Щита та зв'язок 'Ціль'"/>
+                <Image Source="../Images/Cards/Walls.png" Width="190" ToolTip="2 Епоха. Заплатіть 2 Каменя. Отримайте 2 Щита"/>
+                <Image Source="../Images/Cards/Arsenal.png" Width="190" ToolTip="3 Епоха. Заплатіть 3 Цегли та 2 Дерева. Отримайте 3 Щита"/>
+                <Image Source="../Images/Cards/Circus.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Цегли та 2 Каменя або майте зв'язок 'Шолом'. Отримайте 2 Щита"/>
+                <Image Source="../Images/Cards/Court.png" Width="190" ToolTip="3 Епоха. Заплатіть 8 Золота. Отримайте 3 Щита"/>
+                <Image Source="../Images/Cards/Fortification.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Каміня, 1 Цеглу та 1 Папір або майте зв'язок 'Вежа'. Отримайте 2 Щита"/>
+                <Image Source="../Images/Cards/SedimentationWorkshop.png" Width="190" ToolTip="3 Епоха. Заплатіть 3 Дерева та 2 Скла або майте зв'язок 'Ціль'. Отримайте 2 Щита"/>
+                <Image Source="../Images/Cards/ClaySupply.png" Width="190" ToolTip="1 Епоха. Заплатіть 3 Золота. Купляйте Цеглу за 1 Золото"/>
+                <Image Source="../Images/Cards/StoneSupply.png" Width="190" ToolTip="1 Епоха. Заплатіть 3 Золота. Купляйте Камінь за 1 Золото"/>
+                <Image Source="../Images/Cards/Tavern.png" Width="190" ToolTip="1 Епоха. Безкоштовна. Отримайте 4 Золота та зв'язок 'Глек'"/>
+                <Image Source="../Images/Cards/WoodSupply.png" Width="190" ToolTip="1 Епоха. Заплатіть 3 Золота. Купляйте Дерево за 1 Золото"/>
+                <Image Source="../Images/Cards/Brewery.png" Width="190" ToolTip="2 Епоха. Безкоштовна. Отримайте 6 Золота та зв'язок 'Діжка'"/>
+                <Image Source="../Images/Cards/Caravanserai.png" Width="190" ToolTip="2 Епоха. Заплатіть 2 Золота, 1 Скло та 1 Папір. Отримайте складний ресурс Дерево/Цегла/Камінь"/>
+                <Image Source="../Images/Cards/Customs.png" Width="190" ToolTip="2 Епоха. Заплатіть 4 Золота. Куплйте Папір та Скло за 1 Золото"/>
+            </WrapPanel>
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Pages[2], Converter={StaticResource BoolToVis}}">
+                <Image Source="../Images/Cards/Forum.png" Width="190" ToolTip="2 Епоха. Заплатіть 3 Золото та 1 Цеглу. Отримайте складний ресурс Скло/Папір"/>
+                <Image Source="../Images/Cards/Arena.png" Width="190" ToolTip="3 Епоха. Заплатіть 1 Цеглу, 1 Камінь та 1 Дерево або майте зв'язок 'Діжка'. Отримайте 3 Слави та 2 Золота за кожне ваше побудоване диво"/>
+                <Image Source="../Images/Cards/Armory.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Каменя та 1 Скла. Отримайте 3 Слави та 1 Золото за кожну вашу червону карту"/>
+                <Image Source="../Images/Cards/ChamberOfCommerce.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Папера. Отримайте 3 Слави та 3 Золота за кожну вашу сіру карту"/>
+                <Image Source="../Images/Cards/Lighthouse.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Цегли та 1 Скло або майте зв'язок 'Глек'. Отримайте 3 Слави та 1 Золото за кожну вашу жовту карту"/>
+                <Image Source="../Images/Cards/Port.png" Width="190"  ToolTip="3 Епоха. Заплатіть 1 Дерево 1 Скло та 1 Папір. Отримайте 3 Слави та 2 Золота за кожну вашу коричневу карту"/>
+                <Image Source="../Images/Cards/BuildersGuild.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Каменя, 1 Цеглу, 1 Дерево та 1 Скло. В кінци гри отримайте 2 Слави за кожне Диво у гравця з найбільшою кількістю Див"/>
+                <Image Source="../Images/Cards/JudgesGuild.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Дерева, 1 Цеглу та 1 Папір. Негайно отримайте 1 Золото за кожну синю карту у гравця з найбільшою кількістю синіх карт. В кінци гри отримайте 1 Славу за кожну синю карту у гравця з найбільшою кількістю синіх карт"/>
+                <Image Source="../Images/Cards/MerchantsGuild.png" Width="190" ToolTip="3 Епоха. Заплатіть 1 Цеглу, 1 Дерево, 1 Скло, 1 Папір. Негайно отримайте 1 Золото за кожну жовту карту у гравця з найбільшою кількістю жовтих карт. В кінци гри отримайте 1 Славу за кожну жовту карту у гравця з найбільшою кількістю жовтих карт"/>
+                <Image Source="../Images/Cards/MoneylendersGuild.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Каменя та 2 Дерева. В кінці гри отримайте 1 Славу за кожні 3 Золота у гравця з найбільшою кількістю Золота"/>
+                <Image Source="../Images/Cards/ScientistsGuild.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Цегли та 2 Дерева. Негайно отримайте 1 Золото за кожну зелену карту у гравця з найбільшою кількістю зелених карт. В кінци гри отримайте 1 Славу за кожну зелену карту у гравця з найбільшою кількістю зелених карт"/>
+                <Image Source="../Images/Cards/ShipownersGuild.png" Width="190" ToolTip="3 Епоха. Заплатіть 1 Цеглу, 1 Камінь, 1 Скло, 1 Папір. Негайно отримайте 1 Золото за кожну коричневу і сіру карту у гравця з найбільшою сумою кількості коричневих та сірих карт. В кінци гри отримайте 1 Славу за кожну коричневу та сіру карту у гравця з найбільшою сумою кількості коричневих та сірих карт"/>
+                <Image Source="../Images/Cards/WarlordsGuild.png" Width="190" ToolTip="3 Епоха. Заплатіть 2 Каменя, 1 Цегла та 1 Папір. Негайно отримайте 1 Золото за кожну червону карту у гравця з найбільшою кількістю червоних карт. В кінци гри отримайте 1 Славу за кожну червону карту у гравця з найбільшою кількістю червоних карт"/>
+            </WrapPanel>
+            <Button Grid.Row="2" Width="200" HorizontalAlignment="Left" FontSize="23" Content="Минула сторінка" Command="{Binding PreviousPageCommand}" Margin="9 0 0 0"/>
+            <Button Grid.Row="2" Width="200" HorizontalAlignment="Right" FontSize="23" Content="Наступна сторінка" Command="{Binding NextPageCommand}" Margin="0 0 9 0"/>
+        </Grid>
+        <Image Source="../Images/Interface/cross.png" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="80" >
+            <Image.InputBindings>
+                <MouseBinding Gesture="LeftClick" Command="{Binding CloseWindowCommand}"/>
+            </Image.InputBindings>
+        </Image>
     </Grid>
 </Window>
