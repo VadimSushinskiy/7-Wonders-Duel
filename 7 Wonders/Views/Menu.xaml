@@ -9,18 +9,31 @@
         WindowState="Maximized" WindowStyle="None">
     <Grid>
         <Image Source="../Images/Interface/bg-menu.png" Width="1920" Height="1080" Stretch="Fill"/>
-        <Canvas Visibility="{Binding PageVisibility[0]}">
-            <TextBlock Text="{Binding Help}" Canvas.Top="200" FontSize="32" Width="1920" TextAlignment="Center" Foreground="Red"/>
-            <DockPanel Canvas.Left="700" Canvas.Top="400" LastChildFill="False">
-                <Label FontSize="32" DockPanel.Dock="Left" Width="300">Введіть логін:</Label>
-                <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="{Binding Help}" Margin="0 200 0 0" FontSize="32" Width="1920" TextAlignment="Center" Foreground="Red"/>
+        <Canvas Visibility="{Binding PageVisibility[0]}" Width="600" Height="400">
+            <Rectangle Fill="#ABBFAA" Width="600" Height="400" Opacity="0.6" RadiusX="35" RadiusY="35"/>
+            <DockPanel Canvas.Left="40" Canvas.Top="60" LastChildFill="False">
+                <Label FontSize="28" DockPanel.Dock="Left" Width="300">Введіть логін:</Label>
+                <TextBox FontSize="28" DockPanel.Dock="Right" Width="250" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
             </DockPanel>
-            <DockPanel Canvas.Left="700" Canvas.Top="500" LastChildFill="False">
-                <Label FontSize="32" DockPanel.Dock="Left" Width="300">Введіть пароль:</Label>
-                <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+            <DockPanel Canvas.Left="40" Canvas.Top="160" LastChildFill="False">
+                <Label FontSize="28" DockPanel.Dock="Left" Width="300">Введіть пароль:</Label>
+                <TextBox FontSize="28" DockPanel.Dock="Right" Width="250" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
             </DockPanel>
-            <Button Canvas.Left="1046" Canvas.Top="600" Width="200" Height="70" FontSize="24" Content="Увійти" Command="{Binding LogInCommand}"/>
-            <StackPanel Canvas.Left="700" Canvas.Top="590">
+            <Button Canvas.Left="380" Canvas.Top="265" Width="200" Height="70" FontSize="24" Content="Увійти" Command="{Binding LogInCommand}"/>
+            <StackPanel Canvas.Left="40" Canvas.Top="260">
                 <Label FontSize="26">Немає облікового запису?</Label>
                 <TextBlock FontSize="26" TextAlignment="Center" Foreground="Blue" TextDecorations="Underline" Text="Зареєструватися">
                     <TextBlock.InputBindings>
@@ -28,24 +41,35 @@
                     </TextBlock.InputBindings>
                 </TextBlock>
             </StackPanel>
-            <Button Width="200" Height="70" FontSize="24" Content="Вийти" Command="{Binding CloseWindowCommand}"/>
             <Canvas.InputBindings>
                 <KeyBinding Key="Esc" Command="{Binding CloseWindowCommand}"/>
                 <KeyBinding Key="Enter" Command="{Binding LogInCommand}"/>
             </Canvas.InputBindings>
         </Canvas>
-        <Canvas Visibility="{Binding PageVisibility[1]}">
-            <TextBlock Text="{Binding Help}" Canvas.Top="200" FontSize="32" Width="1920" TextAlignment="Center" Foreground="Red"/>
-            <DockPanel Canvas.Left="700" Canvas.Top="400" LastChildFill="False">
-                <Label FontSize="32" DockPanel.Dock="Left" Width="350">Придумайте логін:</Label>
-                <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
+        <Canvas Visibility="{Binding PageVisibility[1]}" Width="600" Height="400">
+            <Rectangle Fill="#ABBFAA" Width="600" Height="400" Opacity="0.6" RadiusX="35" RadiusY="35"/>
+            <DockPanel Canvas.Left="40" Canvas.Top="60" LastChildFill="False">
+                <Label FontSize="28" DockPanel.Dock="Left" Width="300">Придумайте логін:</Label>
+                <TextBox FontSize="28" DockPanel.Dock="Right" Width="250" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
             </DockPanel>
-            <DockPanel Canvas.Left="700" Canvas.Top="500" LastChildFill="False">
-                <Label FontSize="32" DockPanel.Dock="Left" Width="350">Придумайте пароль:</Label>
-                <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+            <DockPanel Canvas.Left="40" Canvas.Top="160" LastChildFill="False">
+                <Label FontSize="28" DockPanel.Dock="Left" Width="300">Придумайте пароль:</Label>
+                <TextBox FontSize="28" DockPanel.Dock="Right" Width="250" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
             </DockPanel>
-            <Button Canvas.Left="1046" Canvas.Top="600" Width="200" Height="70" FontSize="24" Content="Зареєструватись" Command="{Binding RegisterCommand}"/>
-            <Button Width="200" Height="70" FontSize="24" Content="Повернутися" Command="{Binding GoCommand}" CommandParameter="0"/>
+            <Button Canvas.Left="380" Canvas.Top="265" Width="200" Height="70" FontSize="24" Content="Зареєструватись" Command="{Binding RegisterCommand}"/>
+            <Button Canvas.Left="50" Canvas.Top="265" Width="200" Height="70" FontSize="24" Content="Назад" Command="{Binding GoCommand}" CommandParameter="0"/>
             <Canvas.InputBindings>
                 <KeyBinding Key="Esc" Command="{Binding GoCommand}" CommandParameter="0"/>
                 <KeyBinding Key="Enter" Command="{Binding RegisterCommand}"/>
@@ -60,17 +84,30 @@
             <Button Content="Вийти з акаунту" Style="{StaticResource MenuButton}" CommandParameter="0"/>
             <Button Content="Вийти" Style="{StaticResource MenuButton}" Command="{Binding CloseWindowCommand}"/>
         </StackPanel>
-        <Canvas Visibility="{Binding PageVisibility[3]}">
-            <DockPanel Canvas.Left="600" Canvas.Top="400" LastChildFill="False">
+        <Canvas Visibility="{Binding PageVisibility[3]}" Width="750" Height="350">
+            <Rectangle Fill="#ABBFAA" Width="750" Height="350" Opacity="0.6" RadiusX="35" RadiusY="35"/>
+            <DockPanel Canvas.Left="20" Canvas.Top="40" LastChildFill="False">
                 <Label FontSize="32" DockPanel.Dock="Left" Width="450">Введіть ім'я першого гравця:</Label>
-                <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding FirstPlayerName, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding FirstPlayerName, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
             </DockPanel>
-            <DockPanel Canvas.Left="600" Canvas.Top="500" LastChildFill="False">
+            <DockPanel Canvas.Left="20" Canvas.Top="135" LastChildFill="False">
                 <Label FontSize="32" DockPanel.Dock="Left" Width="450">Введіть ім'я другого гравця:</Label>
-                <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding SecondPlayerName, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox FontSize="32" DockPanel.Dock="Right" Width="250" Text="{Binding SecondPlayerName, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
             </DockPanel>
-            <Button Canvas.Left="850" Canvas.Top="600" Width="200" Height="70" FontSize="24" Content="Підтвердити" Click="Button_Click" Command="{Binding StartCommand}"/>
-            <Button Width="200" Height="70" FontSize="24" Content="Повернутись" Command="{Binding GoCommand}" CommandParameter="2"/>
+            <Button Canvas.Left="500" Canvas.Top="250" Width="200" Height="70" FontSize="24" Content="Підтвердити" Click="Button_Click" Command="{Binding StartCommand}"/>
+            <Button Canvas.Left="50" Canvas.Top="250" Width="200" Height="70" FontSize="24" Content="Назад" Command="{Binding GoCommand}" CommandParameter="2"/>
             <Canvas.InputBindings>
                 <KeyBinding Key="Esc" Command="{Binding GoCommand}" CommandParameter="2"/>
                 <KeyBinding Key="Enter" Command="{Binding StartCommand}"/>
@@ -95,7 +132,8 @@
                 <KeyBinding Key="Esc" Command="{Binding GoCommand}" CommandParameter="2"/>
             </Grid.InputBindings>
         </Grid>
-        <Canvas Width="700" Height="300" Background="BurlyWood" Visibility="{Binding PageVisibility[5]}">
+        <Canvas Width="700" Height="300" Visibility="{Binding PageVisibility[5]}">
+            <Rectangle Fill="#ABBFAA" Width="700" Height="300" Opacity="0.6" RadiusX="35" RadiusY="35"/>
             <Button Content="Назад" Style="{StaticResource MenuButton}" CommandParameter="2"/>
             <Label FontSize="32" Canvas.Top="125" Foreground="White" Canvas.Left="220">Вимкнути звук</Label>
             <CheckBox Canvas.Left="450" Canvas.Top="141" IsChecked="{Binding IsMuted}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
@@ -104,7 +142,7 @@
                 </CheckBox.LayoutTransform>
             </CheckBox>
         </Canvas>
-        <Grid Background="BurlyWood" Visibility="{Binding PageVisibility[6]}">
+        <Grid Background="#ABBFAA" Visibility="{Binding PageVisibility[6]}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="926"/>

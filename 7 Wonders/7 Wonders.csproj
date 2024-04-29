@@ -79,7 +79,9 @@
     <None Remove="Images\Interface\bg-game.jpg" />
     <None Remove="Images\Interface\bg-menu.jpg" />
     <None Remove="Images\Interface\bg-menu.png" />
+    <None Remove="Images\Interface\border.png" />
     <None Remove="Images\Interface\cross.png" />
+    <None Remove="Images\Interface\menu-icon.png" />
     <None Remove="Images\LumberCamp.png" />
     <None Remove="Images\Palisade.png" />
     <None Remove="Images\Quarry.png" />
@@ -358,7 +360,13 @@
     <Resource Include="Images\Interface\bg-menu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Interface\border.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Interface\cross.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Interface\menu-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Tokens\Agriculture.png">

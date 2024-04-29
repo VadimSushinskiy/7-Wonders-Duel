@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using _7_Wonders.ViewModels;
 using System.Windows.Forms;
 using _7_Wonders.Services;
+using _7_Wonders.Models.DbModels;
 
 
 
@@ -24,6 +25,8 @@ namespace _7_Wonders
         public event PropertyChangedEventHandler? PropertyChanged;
         public Models.DbModels.ApplicationContext Database { get; private set; }
         private IWindowService _windowService;
+
+
         public RelayCommand RestartCommand { get; set; }
         public RelayCommand HandFlipCommand { get; set; }
         public RelayCommand BuyCommand { get; set; }
@@ -35,15 +38,69 @@ namespace _7_Wonders
         public RelayCommand ChangeMenuViewCommand { get; set; }
         public RelayCommand ShowSettingsCommand { get; set; }
         public RelayCommand QiutCommand { get; set; }
-        public byte EpochNumber { get; set; }
-        public ObservableCollection<Visibility> EpochVisibility {  get; set; }
-        public Wonder WonderToBuy { get; set; }
-        public Card WonderCard { get; set; }
 
-        public int[] BackCards = {2, 3, 4, 9, 10, 11, 12, 13, 26, 27, 28, 29, 30, 35, 36, 37, 42, 43, 44, 49, 50, 55, 56, 57};
+
+        public byte EpochNumber { get; set; }
+
+        private short _firstPlayerFame;
+        public short FirstPlayerFame
+        {
+            get => _firstPlayerFame;
+            set
+            {
+                _firstPlayerFame = value;
+                OnPropertyChanged(nameof(FirstPlayerFame));
+            }
+        }
+        private short _secondPlayerFame;
+        public short SecondPlayerFame
+        {
+            get => _secondPlayerFame;
+            set
+            {
+                _secondPlayerFame = value;
+                OnPropertyChanged(nameof(SecondPlayerFame));
+            }
+        }
+
+        private int _firstPlayerCardsNumber = 0;
+        public int FirstPlayerCardsNumber
+        {
+            get => _firstPlayerCardsNumber;
+            set
+            {
+                _firstPlayerCardsNumber = value;
+                OnPropertyChanged(nameof(FirstPlayerCardsNumber));
+            }
+        }
+        private int _secondPlayerCardsNumber = 0;
+        public int SecondPlayerCardsNumber
+        {
+            get => _secondPlayerCardsNumber;
+            set
+            {
+                _secondPlayerCardsNumber = value;
+                OnPropertyChanged(nameof(SecondPlayerCardsNumber));
+            }
+        }
+        private int _war;
+        public int War
+        {
+            get => _war;
+            set
+            {
+                _war = value;
+                OnPropertyChanged(nameof(War));
+            }
+        }
+
+        public int[] BackCards = { 2, 3, 4, 9, 10, 11, 12, 13, 26, 27, 28, 29, 30, 35, 36, 37, 42, 43, 44, 49, 50, 55, 56, 57 };
+        public int[] FirstPlayerWinPoints { get; set; }
+        public int[] SecondPlayerWinPoints { get; set; }
+
+
         public string FirstPlayerName { get; set; }
         public string SecondPlayerName { get; set; }
-
         private string _help;
         public string Help
         {
@@ -54,6 +111,76 @@ namespace _7_Wonders
                 OnPropertyChanged(nameof(Help));
             }
         }
+        public string WinnerName { get; set; }
+        public string WinType { get; set; }
+
+        public string[] Backs = { @"../Images/Cards/BackFirstEpoch.png", @"../Images/Cards/BackSecondEpoch.png", @"../Images/Cards/BackThirdEpoch.png" };
+
+        public ObservableCollection<string> FirstPlayerCards { get; set; } = new();
+        public ObservableCollection<string> SecondPlayerCards { get; set; } = new();
+        public ObservableCollection<string> FirstPlayerTokens { get; set; } = new();
+        public ObservableCollection<string> SecondPlayerTokens { get; set; } = new();
+        public ObservableCollection<string> FirstPlayerTokenToolTipEnable { get; set; } = new();
+        public ObservableCollection<string> SecondPlayerTokenToolTipEnable { get; set; } = new();
+        public ObservableCollection<string> FirstPlayerTokenToolTip { get; set; } = new();
+        public ObservableCollection<string> SecondPlayerTokenToolTip { get; set; } = new();
+        public ObservableCollection<string> AdditionalTokensToolTipEnable { get; set; } = new();
+        public ObservableCollection<string> CardsName { get; set; } = new();
+        public ObservableCollection<string> WondersName { get; set; } = new();
+        public ObservableCollection<string> WondersHint { get; set; } = new();
+        public ObservableCollection<string> TokensName { get; set; } = new();
+        public ObservableCollection<string> TokensHints { get; set; } = new();
+        public ObservableCollection<string> SelectingCardsNames { get; set; } = new();
+        public ObservableCollection<string> BuildedWonders { get; set; } = new();
+
+
+        private bool _WindowSelectingVisibility = false;
+        public bool WindowSelectingVisibility
+        {
+            get => _WindowSelectingVisibility;
+            set
+            {
+                _WindowSelectingVisibility = value;
+                OnPropertyChanged(nameof(WindowSelectingVisibility));
+            }
+        }
+        private bool _selectingToken;
+        public bool SelectingToken
+        {
+            get => _selectingToken;
+            set
+            {
+                _selectingToken = value;
+                OnPropertyChanged(nameof(SelectingToken));
+            }
+        }
+        private bool _isMuted;
+        public bool IsMuted
+        {
+            get => _isMuted;
+            set
+            {
+                _isMuted = value;
+                OnPropertyChanged(nameof(IsMuted));
+            }
+        }
+        public bool StatisticVisibility { get; set; }
+        public bool MenuVisibility { get; set; }
+
+        public bool[] PlayersInterfaceVisibility { get; set; }
+        public bool[] FirstPlayerHandVisibility { get; set; }
+        public bool[] SecondPlayerHandVisibility { get; set; }
+        public bool[] MenuSettingVisibility { get; set; }
+
+        public ObservableCollection<bool> EpochVisibility {  get; set; }
+        public ObservableCollection<bool> CardsVisibility { get; set; } = new();
+        public ObservableCollection<bool> TokensVisibility { get; set; } = new();
+
+
+        public Wonder WonderToBuy { get; set; }
+        public Card SelectedCard { get; set; }
+        
+        
         private Brush _helpColor;
         public Brush HelpColor
         {
@@ -75,53 +202,14 @@ namespace _7_Wonders
                 OnPropertyChanged(nameof(PeekColor));
             }
         }
-        private int _firstPlayerCardsNumber = 0;
-        public int FirstPlayerCardsNumber
-        {
-            get => _firstPlayerCardsNumber;
-            set
-            {
-                _firstPlayerCardsNumber = value;
-                OnPropertyChanged(nameof(FirstPlayerCardsNumber));
-            }
-        }
-        private int _secondPlayerCardsNumber = 0;
-        public int SecondPlayerCardsNumber
-        {
-            get => _secondPlayerCardsNumber;
-            set
-            {
-                _secondPlayerCardsNumber = value;
-                OnPropertyChanged(nameof(SecondPlayerCardsNumber));
-            }
-        }
-        public ObservableCollection<string> FirstPlayerCards { get; set; } = new();
-        public ObservableCollection<string> SecondPlayerCards { get; set; } = new();
-        public ObservableCollection<string> FirstPlayerTokens { get; set; } = new();
-        public ObservableCollection<string> SecondPlayerTokens { get; set; } = new();
-        public ObservableCollection<string> FirstPlayerTokenToolTipEnable { get; set; } = new();
-        public ObservableCollection<string> SecondPlayerTokenToolTipEnable { get; set; } = new();
-        public ObservableCollection<string> FirstPlayerTokenToolTip { get; set; } = new();
-        public ObservableCollection<string> SecondPlayerTokenToolTip { get; set; } = new();
-        public ObservableCollection<string> AdditionalTokensToolTipEnable { get; set; } = new();
-        public Visibility StartButtonVisibility { get; set; } = Visibility.Visible;
+        public Brush WinColor { get; set; }
+
         public Brush[] NameColors { get; set; } = { Brushes.Black, Brushes.Black };
-        public Visibility[] PlayersInterfaceVisibility { get; set; }
-        public Visibility[] FirstPlayerHandVisibility { get; set; }
-        public Visibility[] SecondPlayerHandVisibility { get; set; }
-        public ObservableCollection<string> CardsName { get; set; } = new();
 
-        public ObservableCollection<string> WondersName { get; set; } = new();
-        public ObservableCollection<string> WondersHint { get; set; } = new();
+        public ObservableCollection<Brush> BorderArounWonderColor { get; set; } = new();
 
-        public ObservableCollection<Visibility> CardsVisibility { get; set; } = new();
-        public ObservableCollection<string> TokensName { get; set; } = new();
-        public ObservableCollection<string> TokensHints { get; set; } = new();
-        public ObservableCollection<Visibility> TokensVisibility { get; set; } = new();
-        
 
         private Resources _firstResources;
-
         public Resources FirstResource
         {
             get => _firstResources;
@@ -132,7 +220,6 @@ namespace _7_Wonders
             }
         }
         private Resources _secondResources;
-
         public Resources SecondResources
         {
             get => _secondResources;
@@ -142,87 +229,7 @@ namespace _7_Wonders
                 OnPropertyChanged(nameof(SecondResources));
             }
         }
-        private short _firstPlayerFame;
-
-        public short FirstPlayerFame
-        {
-            get => _firstPlayerFame;
-            set
-            {
-                _firstPlayerFame = value;
-                OnPropertyChanged(nameof(FirstPlayerFame));
-            }
-        }
-        private short _secondPlayerFame;
-
-        public short SecondPlayerFame
-        {
-            get => _secondPlayerFame;
-            set
-            {
-                _secondPlayerFame = value;
-                OnPropertyChanged(nameof(SecondPlayerFame));
-            }
-        }
-        private int _war;
-
-        public int War
-        {
-            get => _war;
-            set
-            {
-                _war = value;
-                OnPropertyChanged(nameof(War));
-            }
-        }
-
-        private Visibility _WindowSelectingVisibility = Visibility.Collapsed;
-
-        public Visibility WindowSelectingVisibility
-        {
-            get => _WindowSelectingVisibility;
-            set
-            {
-                _WindowSelectingVisibility = value;
-                OnPropertyChanged(nameof(WindowSelectingVisibility));
-            }
-        }
-
-        private bool _selectingToken;
-        public bool SelectingToken
-        {
-            get => _selectingToken;
-            set
-            {
-                _selectingToken = value;
-                OnPropertyChanged(nameof(SelectingToken));
-            }
-        }
-        public ObservableCollection<string> SelectingCardsNames { get; set; } = new();
-        public ObservableCollection<string> BuildedWonders {  get; set; } = new();
-        public ObservableCollection<Brush> BorderArounWonderColor { get; set; } = new();
-
-        public string[] Backs = { @"../Images/Cards/BackFirstEpoch.png", @"../Images/Cards/BackSecondEpoch.png", @"../Images/Cards/BackThirdEpoch.png" };
-
-        private bool _isMuted;
-        public bool IsMuted
-        {
-            get => _isMuted;
-            set
-            {
-                _isMuted = value;
-                OnPropertyChanged(nameof(IsMuted));
-            }
-        }
-
-        public string WinnerName { get; set; }
-        public string WinType { get; set; }
-        public Brush WinColor { get; set; }
-        public int[] FirstPlayerWinPoints { get; set; }
-        public int[] SecondPlayerWinPoints { get; set; }
-        public Visibility StatisticVisibility { get; set; }
-        public bool MenuVisibility {  get; set; }
-        public bool[] MenuSettingVisibility {  get; set; }
+        
         public GameViewModel()
         {
             Database = new();
@@ -242,348 +249,56 @@ namespace _7_Wonders
             BuyCommand = new RelayCommand(obj =>
             {
                 int idx = int.Parse((string)obj);
-                CardsVisibility[idx] = Visibility.Collapsed;
-                if (WonderToBuy != null && ((WonderToBuy.Effect == Wonder.WonderEffect.StealBrown && Game.CurrentPlayer.Opponent.BrownCards.Count > 0) ||
-                (WonderToBuy.Effect == Wonder.WonderEffect.StealGray && Game.CurrentPlayer.Opponent.GrayCards.Count > 0) ||
-                (WonderToBuy.Effect == Wonder.WonderEffect.TakeDiscard && Game.DiscardedCards.Count > 0) ||
-                (WonderToBuy.Effect == Wonder.WonderEffect.Token && TokensVisibility.Contains(Visibility.Visible))))
-                {
-                    WonderCard = Game.CardsList[idx];
-                    HelpColor = Brushes.Green;
-                    switch (WonderToBuy.Effect)
-                    {
-                        case Wonder.WonderEffect.StealBrown:
-                            {
-                                for (int i = 0; i < Game.CurrentPlayer.Opponent.BrownCards.Count; i++)
-                                {
-                                    SelectingCardsNames[i] = @"../Images/Cards/" + Game.CurrentPlayer.Opponent.BrownCards[i].Name + ".png";
-                                }
-                                Help = "Оберіть карту. Ваш суперник буде змушений її скинути";
-                                break;
-                            }
-                        case Wonder.WonderEffect.StealGray:
-                            {
-                                for (int i = 0; i < Game.CurrentPlayer.Opponent.GrayCards.Count; i++)
-                                {
-                                    SelectingCardsNames[i] = @"../Images/Cards/" + Game.CurrentPlayer.Opponent.GrayCards[i].Name + ".png";
-                                }
-                                Help = "Оберіть карту. Ваш суперник буде змушений її скинути";
-                                break;
-                            }
-                        case Wonder.WonderEffect.TakeDiscard:
-                            {
-                                for (int i = 0; i < Game.DiscardedCards.Count; i++)
-                                {
-                                    SelectingCardsNames[i] = @"../Images/Cards/" + Game.DiscardedCards[i].Name + ".png";
-                                }
-                                Help = "Оберіть одну з карт, скинутих під час гри. Ви отримаєте її собі у руку";
-                                break;
-                            }
-                        case Wonder.WonderEffect.Token:
-                            {
-                                for (int i = 0; i < Game.AdditionalTokens.Count; i++)
-                                {
-                                    SelectingCardsNames[i] = @"../Images/Tokens/" + Game.AdditionalTokens[i].Name + ".png";
-                                    AdditionalTokensToolTipEnable[i] = "True";
-                                }
-                                Help = "Оберіть один з трьох жетонів, які не беруть участь у грі";
-                                break;
-                            }
-                    }
-                    OnPropertyChanged(nameof(SelectingCardsNames));
-                    OnPropertyChanged(nameof(AdditionalTokensToolTipEnable));
-                    WindowSelectingVisibility = Visibility.Visible;
-                    BuildedWonders[Game.WondersList.IndexOf(WonderToBuy)] = Backs[EpochNumber - 1];
-                    HideBorder();
-                    OnPropertyChanged(nameof(BuildedWonders));
-                }
-                else
-                {
-                    if (WonderToBuy != null)
-                    {
-                        Game.CurrentPlayer.BuildWonder(WonderToBuy, Game.CardsList[idx]);
-                        BuildedWonders[Game.WondersList.IndexOf(WonderToBuy)] = Backs[EpochNumber - 1];
-                        WonderToBuy = null;
-                        HideBorder();
-                        OnPropertyChanged(nameof(BuildedWonders));
-                        UpdateField();
-                    }
-                    else if (Game.CardsList[idx] is GreenCard greenCard && Game.CurrentPlayer.Symbols[(int)greenCard.Symbol])
-                    {
-                        SelectingToken = true;
-                        WonderCard = Game.CardsList[idx];
-                        HelpColor = Brushes.Green;
-                        Help = "Ви зібрали два однакових наукових символа. В нагороду оберіть один з жетонів у верхній частині екрана";
-                    }
-                    else
-                    {
-                        AddCartToHand(Game.CardsList[idx]);
-                        Game.CurrentPlayer.BuyCard(Game.CardsList[idx]);
-                        UpdateField();
-                    }
-                }
+                BuyCommandExecuted(idx);
             }, obj =>
             {
                 Card card = Game.CardsList[int.Parse((string)obj)];
-                if (SelectingToken)
-                {
-                    return false;
-                }
-                if (!card.IsAvailable)
-                {
-                    HelpColor = Brushes.Red;
-                    Help = "Ви не можете обрати карту, яка заблокована іншими картами";
-                    return false;
-                }
-                else if (Game.CurrentPlayer.CheckPrice(card) == -1 && WonderToBuy == null)
-                {
-                    HelpColor = Brushes.Red;
-                    Help = "У вас не вистачає ресурсів для покупци цієї карти";
-                    return false;
-                }
-                return true;
+                return BuyCommandCanExecute(card);
             });
 
             SellCommand = new RelayCommand(obj =>
             {
                 int idx = int.Parse((string)obj);
-                Game.CurrentPlayer.SellCard(Game.CardsList[idx]);
-                CardsVisibility[idx] = Visibility.Collapsed;
-                UpdateField();
+                SellCommandExecuted(idx);
             }, obj =>
             {
                 Card card = Game.CardsList[int.Parse((string)obj)];
-                if (SelectingToken)
-                {
-                    return false;
-                }
-                if (WonderToBuy != null)
-                {
-                    return false;
-                }
-                if (!card.IsAvailable)
-                {
-                    HelpColor = Brushes.Red;
-                    Help = "Ви не можете обрати карту, яка заблокована іншими картами";
-                    return false;
-                }
-                return true;
+                return SellCommandCanExecute(card);
             });
 
             HandFlipCommand = new RelayCommand(obj =>
             {
-                Visibility[] visibilities;
-                visibilities = (PlayersInterfaceVisibility[0] == Visibility.Visible) ? FirstPlayerHandVisibility : SecondPlayerHandVisibility;
-                if (visibilities[0] == Visibility.Visible)
-                {
-                    visibilities[0] = Visibility.Collapsed;
-                    visibilities[1] = Visibility.Visible;
-                }
-                else
-                {
-                    visibilities[0] = Visibility.Visible;
-                    visibilities[1] = Visibility.Collapsed;
-                }
-                if (PlayersInterfaceVisibility[0] == Visibility.Visible)
-                {
-                    OnPropertyChanged(nameof(FirstPlayerHandVisibility));
-                }
-                else
-                {
-                    OnPropertyChanged(nameof(SecondPlayerHandVisibility));
-                }
+                HandFlipCommandExecuted();
             }, obj =>
             {
-                return (PlayersInterfaceVisibility[0] == Visibility.Visible && (FirstPlayerCardsNumber > 15 || FirstPlayerHandVisibility[1] == Visibility.Visible)) ||
-                (PlayersInterfaceVisibility[1] == Visibility.Visible && (SecondPlayerCardsNumber > 15 || SecondPlayerHandVisibility[1] == Visibility.Visible));
+                return HandFlipCommandCanExecuted();
             });
 
             BuyWonderCommand = new RelayCommand(obj =>
             {
                 int idx = int.Parse((string)obj);
-                Wonder wonder = Game.WondersList[idx];
-                HideBorder();
-                if (wonder == WonderToBuy)
-                {
-                    WonderToBuy = null;
-                    Help = string.Empty;
-                }
-                else
-                {
-                    WonderToBuy = wonder;
-                    BorderArounWonderColor[idx] = Brushes.Green;
-                    OnPropertyChanged(nameof(BorderArounWonderColor));
-                    HelpColor = Brushes.Green;
-                    Help = "Оберіть будь-яку доступну карту для побудови дива";
-                }
+                BuyWonderCommandExecuted(idx);
             }, obj =>
             {
                 Wonder wonder = Game.WondersList[int.Parse((string)obj)];
-                if (SelectingToken)
-                {
-                    return false;
-                }
-                if (!Game.CurrentPlayer.Wonders.TryGetValue(wonder, out bool tmp))
-                {
-                    HelpColor = Brushes.Red;
-                    Help = "Ви не можете побудувати диво суперника";
-                    return false;
-                }
-                if (Game.CurrentPlayer.Wonders[wonder])
-                {
-                    HelpColor = Brushes.Red;
-                    Help = "Це диво вже було побудовано";
-                    return false;
-                }
-                else if (!Game.WonderIsAvailable)
-                {
-                    HelpColor = Brushes.Red;
-                    Help = "Сім див вже було побудовано. Ви не можете побудувати восьме";
-                    return false;
-                }
-                else if (Game.CurrentPlayer.CheckPrice(wonder) == -1)
-                {
-                    HelpColor = Brushes.Red;
-                    Help = "Недостатньо ресурсів для побудови цього дива";
-                    return false;
-                }
-                return true;
+                return BuyWonderCommandCanExecuted(wonder);
             });
 
             SelectCardCommand = new RelayCommand(obj =>
             {
                 int idx = int.Parse((string)obj);
-                switch (WonderToBuy.Effect)
-                {
-                    case Wonder.WonderEffect.StealBrown:
-                        {
-                            Game.CurrentPlayer.ChosenCard = Game.CurrentPlayer.Opponent.BrownCards[idx];
-                            for (int i = 0; i < Game.CurrentPlayer.Opponent.BrownCards.Count; i++)
-                            {
-                                SelectingCardsNames[i] = @"../Images/Cards/Transparent.png";
-                            }
-                            break;
-                        }
-                    case Wonder.WonderEffect.StealGray:
-                        {
-                            Game.CurrentPlayer.ChosenCard = Game.CurrentPlayer.Opponent.GrayCards[idx];
-                            for (int i = 0; i < Game.CurrentPlayer.Opponent.GrayCards.Count; i++)
-                            {
-                                SelectingCardsNames[i] = @"../Images/Cards/Transparent.png";
-                            }
-                            break;
-                        }
-                    case Wonder.WonderEffect.TakeDiscard:
-                        {
-                            Game.CurrentPlayer.ChosenCard = Game.DiscardedCards[idx];
-                            for (int i = 0; i < Game.DiscardedCards.Count; i++)
-                            {
-                                SelectingCardsNames[i] = @"../Images/Cards/Transparent.png";
-                            }
-                            break;
-                        }
-                    case Wonder.WonderEffect.Token:
-                        {
-                            Game.CurrentPlayer.ChosenToken = Game.AdditionalTokens[idx];
-                            for (int i = 0; i < Game.AdditionalTokens.Count; i++)
-                            {
-                                SelectingCardsNames[i] = @"../Images/Cards/Transparent.png";
-                                AdditionalTokensToolTipEnable[i] = "False";
-                                OnPropertyChanged(nameof(AdditionalTokensToolTipEnable));
-                            }
-                            AddToken();
-                            break;
-                        }
-                }
-                WindowSelectingVisibility = Visibility.Collapsed;
-                if (WonderToBuy.Effect == Wonder.WonderEffect.StealGray || WonderToBuy.Effect == Wonder.WonderEffect.StealBrown)
-                {
-                    if (Game.CurrentPlayer == Game.FirstPlayer)
-                    {
-                        for (int i = 0; i < SecondPlayerCards.Count; i++)
-                        {
-                            if (SecondPlayerCards[i].Contains(Game.FirstPlayer.ChosenCard.Name))
-                            {
-                                DeleteCardFromHand(SecondPlayerCards, i);
-                                SecondPlayerCardsNumber--;
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0; i < FirstPlayerCards.Count; i++)
-                        {
-                            if (FirstPlayerCards[i].Contains(Game.SecondPlayer.ChosenCard.Name))
-                            {
-                                DeleteCardFromHand(FirstPlayerCards, i);
-                                FirstPlayerCardsNumber--;
-                                break;
-                            }
-                        }
-                    }
-                }
-                else if (WonderToBuy.Effect == Wonder.WonderEffect.TakeDiscard && !(Game.CurrentPlayer.ChosenCard is GreenCard card && Game.CurrentPlayer.Symbols[(int)card.Symbol]))
-                {
-                    AddCartToHand(Game.CurrentPlayer.ChosenCard);
-                }
-                if (WonderToBuy.Effect == Wonder.WonderEffect.TakeDiscard && Game.CurrentPlayer.ChosenCard is GreenCard greenCard && Game.CurrentPlayer.Symbols[(int)greenCard.Symbol])
-                {
-                    SelectingToken = true;
-                    HelpColor = Brushes.Green;
-                    Help = "Ви зібрали два однакових наукових символа. В нагороду оберіть один з жетонів у верхній частині екрана";
-                }
-                else
-                {
-                    Game.CurrentPlayer.BuildWonder(WonderToBuy, WonderCard);
-                    WonderToBuy = null;
-                    WonderCard = null;
-                    Game.FirstPlayer.ChosenCard = null;
-                    Game.FirstPlayer.ChosenToken = null;
-                    Game.SecondPlayer.ChosenCard = null;
-                    Game.SecondPlayer.ChosenToken = null;
-                    UpdateField();
-                }
+                SelectCardCommandExecuted(idx);
 
             }, obj =>
             {
                 int idx = int.Parse((string)obj);
-                switch (WonderToBuy.Effect)
-                {
-                    case Wonder.WonderEffect.StealBrown: return idx < Game.CurrentPlayer.Opponent.BrownCards.Count;
-                    case Wonder.WonderEffect.StealGray: return idx < Game.CurrentPlayer.Opponent.GrayCards.Count;
-                    case Wonder.WonderEffect.TakeDiscard: return idx < Game.DiscardedCards.Count;
-                    case Wonder.WonderEffect.Token: return idx < Game.AdditionalTokens.Count;
-                }
-                return false;
+                return SelectCardCommandCanExecute(idx);
             });
 
             SelectTokenCommand = new RelayCommand(obj =>
             {
-                Card card = (WonderToBuy != null && WonderToBuy.Effect == Wonder.WonderEffect.TakeDiscard) ? Game.CurrentPlayer.ChosenCard : WonderCard;
                 int idx = int.Parse((string)obj);
-                Game.CurrentPlayer.ChosenToken = Game.GameTokens[idx];
-                AddCartToHand(card);
-                AddToken();
-                if (WonderToBuy == null || WonderToBuy.Effect != Wonder.WonderEffect.TakeDiscard)
-                {
-                    Game.CurrentPlayer.BuyCard(WonderCard);
-                }
-                else
-                {
-                    Game.CurrentPlayer.BuildWonder(WonderToBuy, WonderCard);
-                    WonderToBuy = null;
-                    Game.FirstPlayer.ChosenCard = null;
-                    Game.SecondPlayer.ChosenCard = null;
-                }
-                Game.FirstPlayer.ChosenToken = null;
-                Game.SecondPlayer.ChosenToken = null;
-                WonderCard = null;
-                SelectingToken = false;
-                TokensVisibility[idx] = Visibility.Collapsed;
-                UpdateField();
-                OnPropertyChanged(nameof(TokensVisibility));
-
+                SelectTokenCommandExecuted(idx);
             }, obj =>
             {
                 return SelectingToken;
@@ -591,20 +306,16 @@ namespace _7_Wonders
 
             PeekCommand = new RelayCommand(obj =>
             {
-                for (int i = 0; i < PlayersInterfaceVisibility.Length; i++)
-                {
-                    if (PlayersInterfaceVisibility[i] == Visibility.Visible) PlayersInterfaceVisibility[i] = Visibility.Collapsed;
-                    else PlayersInterfaceVisibility[i] = Visibility.Visible;
-                }
-                if (PeekColor == Brushes.Transparent) PeekColor = Brushes.Green;
-                else PeekColor = Brushes.Transparent;
-                OnPropertyChanged(nameof(PlayersInterfaceVisibility));
+                PeekCommandExecuted();
             });
 
             QiutCommand = new RelayCommand(obj =>
             {
                 Mediator.PageId = 2;
                 Mediator.IsMuted = IsMuted;
+                User user = Database.Users.Find(Mediator.UserId);
+                user.IsSoundMuted = IsMuted;
+                Database.SaveChanges();
                 _windowService.OpenWindow();
             });
 
@@ -654,22 +365,22 @@ namespace _7_Wonders
             BuildedWonders = new();
             BorderArounWonderColor = new();
             EpochNumber = 1;
-            EpochVisibility = new ObservableCollection<Visibility> { Visibility.Visible, Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed };
+            EpochVisibility = new ObservableCollection<bool> { true, false, false, false };
             
 
             for (int i = 0; i < 20; i++)
             {
-                CardsVisibility.Add(Visibility.Visible);
+                CardsVisibility.Add(true);
                 CardsName.Add(@"../Images/Cards/BackFirstEpoch.png");
             }
             for (int i = 0; i < 20; i++)
             {
-                CardsVisibility.Add(Visibility.Visible);
+                CardsVisibility.Add(true);
                 CardsName.Add(@"../Images/Cards/BackSecondEpoch.png");
             }
             for (int i = 0; i < 20; i++)
             {
-                CardsVisibility.Add(Visibility.Visible);
+                CardsVisibility.Add(true);
                 CardsName.Add(@"../Images/Cards/BackThirdEpoch.png");
             }
 
@@ -696,7 +407,7 @@ namespace _7_Wonders
 
             for (int i = 0; i < 5; i++)
             {
-                TokensVisibility.Add(Visibility.Visible);
+                TokensVisibility.Add(true);
             }
             for (int i = 0; i < 6; i++)
             {
@@ -713,16 +424,16 @@ namespace _7_Wonders
             }
 
             PeekColor = Brushes.Transparent;
-            PlayersInterfaceVisibility = [Visibility.Visible, Visibility.Collapsed];
-            FirstPlayerHandVisibility = [Visibility.Visible, Visibility.Collapsed];
-            SecondPlayerHandVisibility = [Visibility.Visible, Visibility.Collapsed];
+            PlayersInterfaceVisibility = [true, false];
+            FirstPlayerHandVisibility = [true, false];
+            SecondPlayerHandVisibility = [true, false];
 
             WinnerName = "";
             WinType = "";
             FirstPlayerWinPoints = new int[9];
             SecondPlayerWinPoints = new int[9];
             WinColor = Brushes.Purple;
-            StatisticVisibility = Visibility.Collapsed;
+            StatisticVisibility = false;
 
             MenuVisibility = false;
             MenuSettingVisibility = [true, false];
@@ -763,7 +474,6 @@ namespace _7_Wonders
             FirstPlayerFame = Game.FirstPlayer.Fame;
             SecondPlayerFame = Game.SecondPlayer.Fame;
 
-            OnPropertyChanged(nameof(StartButtonVisibility));
             OnPropertyChanged(nameof(FirstPlayerName));
             OnPropertyChanged(nameof(SecondPlayerName));
             OnPropertyChanged(nameof(CardsName));
@@ -862,15 +572,15 @@ namespace _7_Wonders
             {
                 NameColors[0] = Brushes.Green;
                 NameColors[1] = Brushes.Black;
-                PlayersInterfaceVisibility[0] = Visibility.Visible;
-                PlayersInterfaceVisibility[1] = Visibility.Collapsed;
+                PlayersInterfaceVisibility[0] = true;
+                PlayersInterfaceVisibility[1] = false;
             }
             else
             {
                 NameColors[0] = Brushes.Black;
                 NameColors[1] = Brushes.Green;
-                PlayersInterfaceVisibility[0] = Visibility.Collapsed;
-                PlayersInterfaceVisibility[1] = Visibility.Visible;
+                PlayersInterfaceVisibility[0] = false;
+                PlayersInterfaceVisibility[1] = true;
             }
             OnPropertyChanged(nameof(PlayersInterfaceVisibility));
             OnPropertyChanged(nameof(NameColors));
@@ -890,9 +600,9 @@ namespace _7_Wonders
             OnPropertyChanged(nameof(CardsVisibility));
             if (EpochNumber < Game.Epoch)
             {
-                EpochVisibility[EpochNumber - 1] = Visibility.Collapsed;
+                EpochVisibility[EpochNumber - 1] = false;
                 EpochNumber = Game.Epoch;
-                EpochVisibility[EpochNumber - 1] = Visibility.Visible;
+                EpochVisibility[EpochNumber - 1] = true;
                 OnPropertyChanged(nameof(EpochVisibility));
                 if (EpochNumber == 4)
                 {
@@ -925,7 +635,7 @@ namespace _7_Wonders
                     WinColor = Brushes.Purple;
                     CalcucalatePoints(Game.FirstPlayer, FirstPlayerWinPoints);
                     CalcucalatePoints(Game.SecondPlayer, SecondPlayerWinPoints);
-                    StatisticVisibility = Visibility.Visible;
+                    StatisticVisibility = true;
                     OnPropertyChanged(nameof(FirstPlayerWinPoints));
                     OnPropertyChanged(nameof(SecondPlayerWinPoints));
                     break;
@@ -935,7 +645,7 @@ namespace _7_Wonders
             OnPropertyChanged(nameof(WinType));
             OnPropertyChanged(nameof(WinColor));
             OnPropertyChanged(nameof(StatisticVisibility));
-            Database.GameResults.Add(new Models.DbModels.GameResults { FirstPlayerName = FirstPlayerName, SecondPlayerName = SecondPlayerName,
+            Database.GameResults.Add(new GameResults { FirstPlayerName = FirstPlayerName, SecondPlayerName = SecondPlayerName,
                 WinType = WinType.Remove(WinType.Length - 1),  Winner = WinnerName, UserId = Mediator.UserId});
             Database.SaveChanges();
         }
@@ -1015,6 +725,364 @@ namespace _7_Wonders
             pointArray[7] = count;
             pointArray[3] = player.WinningPoints - pointArray.Sum();
             pointArray[8] = player.WinningPoints;
+        }
+
+        public void BuyCommandExecuted(int idx)
+        {
+            CardsVisibility[idx] = false;
+            if (WonderToBuy != null && ((WonderToBuy.Effect == Wonder.WonderEffect.StealBrown && Game.CurrentPlayer.Opponent.BrownCards.Count > 0) ||
+            (WonderToBuy.Effect == Wonder.WonderEffect.StealGray && Game.CurrentPlayer.Opponent.GrayCards.Count > 0) ||
+            (WonderToBuy.Effect == Wonder.WonderEffect.TakeDiscard && Game.DiscardedCards.Count > 0) ||
+            (WonderToBuy.Effect == Wonder.WonderEffect.Token && TokensVisibility.Contains(true))))
+            {
+                SelectedCard = Game.CardsList[idx];
+                HelpColor = Brushes.Green;
+                switch (WonderToBuy.Effect)
+                {
+                    case Wonder.WonderEffect.StealBrown:
+                        {
+                            for (int i = 0; i < Game.CurrentPlayer.Opponent.BrownCards.Count; i++)
+                            {
+                                SelectingCardsNames[i] = @"../Images/Cards/" + Game.CurrentPlayer.Opponent.BrownCards[i].Name + ".png";
+                            }
+                            Help = "Оберіть карту. Ваш суперник буде змушений її скинути";
+                            break;
+                        }
+                    case Wonder.WonderEffect.StealGray:
+                        {
+                            for (int i = 0; i < Game.CurrentPlayer.Opponent.GrayCards.Count; i++)
+                            {
+                                SelectingCardsNames[i] = @"../Images/Cards/" + Game.CurrentPlayer.Opponent.GrayCards[i].Name + ".png";
+                            }
+                            Help = "Оберіть карту. Ваш суперник буде змушений її скинути";
+                            break;
+                        }
+                    case Wonder.WonderEffect.TakeDiscard:
+                        {
+                            for (int i = 0; i < Game.DiscardedCards.Count; i++)
+                            {
+                                SelectingCardsNames[i] = @"../Images/Cards/" + Game.DiscardedCards[i].Name + ".png";
+                            }
+                            Help = "Оберіть одну з карт, скинутих під час гри. Ви отримаєте її собі у руку";
+                            break;
+                        }
+                    case Wonder.WonderEffect.Token:
+                        {
+                            for (int i = 0; i < Game.AdditionalTokens.Count; i++)
+                            {
+                                SelectingCardsNames[i] = @"../Images/Tokens/" + Game.AdditionalTokens[i].Name + ".png";
+                                AdditionalTokensToolTipEnable[i] = "True";
+                            }
+                            Help = "Оберіть один з трьох жетонів, які не беруть участь у грі";
+                            break;
+                        }
+                }
+                OnPropertyChanged(nameof(SelectingCardsNames));
+                OnPropertyChanged(nameof(AdditionalTokensToolTipEnable));
+                WindowSelectingVisibility = true;
+                BuildedWonders[Game.WondersList.IndexOf(WonderToBuy)] = Backs[EpochNumber - 1];
+                HideBorder();
+                OnPropertyChanged(nameof(BuildedWonders));
+            }
+            else
+            {
+                if (WonderToBuy != null)
+                {
+                    Game.CurrentPlayer.BuildWonder(WonderToBuy, Game.CardsList[idx]);
+                    BuildedWonders[Game.WondersList.IndexOf(WonderToBuy)] = Backs[EpochNumber - 1];
+                    WonderToBuy = null;
+                    HideBorder();
+                    OnPropertyChanged(nameof(BuildedWonders));
+                    UpdateField();
+                }
+                else if (Game.CardsList[idx] is GreenCard greenCard && Game.CurrentPlayer.Symbols[(int)greenCard.Symbol])
+                {
+                    SelectingToken = true;
+                    SelectedCard = Game.CardsList[idx];
+                    HelpColor = Brushes.Green;
+                    Help = "Ви зібрали два однакових наукових символа. В нагороду оберіть один з жетонів у верхній частині екрана";
+                }
+                else
+                {
+                    AddCartToHand(Game.CardsList[idx]);
+                    Game.CurrentPlayer.BuyCard(Game.CardsList[idx]);
+                    UpdateField();
+                }
+            }
+        }
+
+        public bool BuyCommandCanExecute(Card card)
+        {
+            if (SelectingToken)
+            {
+                return false;
+            }
+            if (!card.IsAvailable)
+            {
+                HelpColor = Brushes.Red;
+                Help = "Ви не можете обрати карту, яка заблокована іншими картами";
+                return false;
+            }
+            else if (Game.CurrentPlayer.CheckPrice(card) == -1 && WonderToBuy == null)
+            {
+                HelpColor = Brushes.Red;
+                Help = "У вас не вистачає ресурсів для покупци цієї карти";
+                return false;
+            }
+            return true;
+        }
+
+        public void SellCommandExecuted(int idx)
+        {
+            Game.CurrentPlayer.SellCard(Game.CardsList[idx]);
+            CardsVisibility[idx] = false;
+            UpdateField();
+        }
+
+        public bool SellCommandCanExecute(Card card)
+        {
+            if (SelectingToken)
+            {
+                return false;
+            }
+            if (WonderToBuy != null)
+            {
+                return false;
+            }
+            if (!card.IsAvailable)
+            {
+                HelpColor = Brushes.Red;
+                Help = "Ви не можете обрати карту, яка заблокована іншими картами";
+                return false;
+            }
+            return true;
+        }
+
+        public void HandFlipCommandExecuted()
+        {
+            bool[] visibilities;
+            visibilities = (PlayersInterfaceVisibility[0] == true) ? FirstPlayerHandVisibility : SecondPlayerHandVisibility;
+            if (visibilities[0] == true)
+            {
+                visibilities[0] = false;
+                visibilities[1] = true;
+            }
+            else
+            {
+                visibilities[0] = true;
+                visibilities[1] = false;
+            }
+            if (PlayersInterfaceVisibility[0] == true)
+            {
+                OnPropertyChanged(nameof(FirstPlayerHandVisibility));
+            }
+            else
+            {
+                OnPropertyChanged(nameof(SecondPlayerHandVisibility));
+            }
+        }
+
+        public bool HandFlipCommandCanExecuted()
+        {
+            return (PlayersInterfaceVisibility[0] == true && (FirstPlayerCardsNumber > 15 || FirstPlayerHandVisibility[1] == true)) ||
+                (PlayersInterfaceVisibility[1] == true && (SecondPlayerCardsNumber > 15 || SecondPlayerHandVisibility[1] == true));
+        }
+
+        public void BuyWonderCommandExecuted(int idx)
+        {
+            Wonder wonder = Game.WondersList[idx];
+            HideBorder();
+            if (wonder == WonderToBuy)
+            {
+                WonderToBuy = null;
+                Help = string.Empty;
+            }
+            else
+            {
+                WonderToBuy = wonder;
+                BorderArounWonderColor[idx] = Brushes.Green;
+                OnPropertyChanged(nameof(BorderArounWonderColor));
+                HelpColor = Brushes.Green;
+                Help = "Оберіть будь-яку доступну карту для побудови дива";
+            }
+        }
+
+        public bool BuyWonderCommandCanExecuted(Wonder wonder)
+        {
+            if (SelectingToken)
+            {
+                return false;
+            }
+            if (!Game.CurrentPlayer.Wonders.TryGetValue(wonder, out bool tmp))
+            {
+                HelpColor = Brushes.Red;
+                Help = "Ви не можете побудувати диво суперника";
+                return false;
+            }
+            if (Game.CurrentPlayer.Wonders[wonder])
+            {
+                HelpColor = Brushes.Red;
+                Help = "Це диво вже було побудовано";
+                return false;
+            }
+            else if (!Game.WonderIsAvailable)
+            {
+                HelpColor = Brushes.Red;
+                Help = "Сім див вже було побудовано. Ви не можете побудувати восьме";
+                return false;
+            }
+            else if (Game.CurrentPlayer.CheckPrice(wonder) == -1)
+            {
+                HelpColor = Brushes.Red;
+                Help = "Недостатньо ресурсів для побудови цього дива";
+                return false;
+            }
+            return true;
+        }
+
+        public void SelectCardCommandExecuted(int idx)
+        {
+            switch (WonderToBuy.Effect)
+            {
+                case Wonder.WonderEffect.StealBrown:
+                    {
+                        Game.CurrentPlayer.ChosenCard = Game.CurrentPlayer.Opponent.BrownCards[idx];
+                        for (int i = 0; i < Game.CurrentPlayer.Opponent.BrownCards.Count; i++)
+                        {
+                            SelectingCardsNames[i] = @"../Images/Cards/Transparent.png";
+                        }
+                        break;
+                    }
+                case Wonder.WonderEffect.StealGray:
+                    {
+                        Game.CurrentPlayer.ChosenCard = Game.CurrentPlayer.Opponent.GrayCards[idx];
+                        for (int i = 0; i < Game.CurrentPlayer.Opponent.GrayCards.Count; i++)
+                        {
+                            SelectingCardsNames[i] = @"../Images/Cards/Transparent.png";
+                        }
+                        break;
+                    }
+                case Wonder.WonderEffect.TakeDiscard:
+                    {
+                        Game.CurrentPlayer.ChosenCard = Game.DiscardedCards[idx];
+                        for (int i = 0; i < Game.DiscardedCards.Count; i++)
+                        {
+                            SelectingCardsNames[i] = @"../Images/Cards/Transparent.png";
+                        }
+                        break;
+                    }
+                case Wonder.WonderEffect.Token:
+                    {
+                        Game.CurrentPlayer.ChosenToken = Game.AdditionalTokens[idx];
+                        for (int i = 0; i < Game.AdditionalTokens.Count; i++)
+                        {
+                            SelectingCardsNames[i] = @"../Images/Cards/Transparent.png";
+                            AdditionalTokensToolTipEnable[i] = "False";
+                            OnPropertyChanged(nameof(AdditionalTokensToolTipEnable));
+                        }
+                        AddToken();
+                        break;
+                    }
+            }
+            WindowSelectingVisibility = false;
+            if (WonderToBuy.Effect == Wonder.WonderEffect.StealGray || WonderToBuy.Effect == Wonder.WonderEffect.StealBrown)
+            {
+                if (Game.CurrentPlayer == Game.FirstPlayer)
+                {
+                    for (int i = 0; i < SecondPlayerCards.Count; i++)
+                    {
+                        if (SecondPlayerCards[i].Contains(Game.FirstPlayer.ChosenCard.Name))
+                        {
+                            DeleteCardFromHand(SecondPlayerCards, i);
+                            SecondPlayerCardsNumber--;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < FirstPlayerCards.Count; i++)
+                    {
+                        if (FirstPlayerCards[i].Contains(Game.SecondPlayer.ChosenCard.Name))
+                        {
+                            DeleteCardFromHand(FirstPlayerCards, i);
+                            FirstPlayerCardsNumber--;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (WonderToBuy.Effect == Wonder.WonderEffect.TakeDiscard && !(Game.CurrentPlayer.ChosenCard is GreenCard card && Game.CurrentPlayer.Symbols[(int)card.Symbol]))
+            {
+                AddCartToHand(Game.CurrentPlayer.ChosenCard);
+            }
+            if (WonderToBuy.Effect == Wonder.WonderEffect.TakeDiscard && Game.CurrentPlayer.ChosenCard is GreenCard greenCard && Game.CurrentPlayer.Symbols[(int)greenCard.Symbol])
+            {
+                SelectingToken = true;
+                HelpColor = Brushes.Green;
+                Help = "Ви зібрали два однакових наукових символа. В нагороду оберіть один з жетонів у верхній частині екрана";
+            }
+            else
+            {
+                Game.CurrentPlayer.BuildWonder(WonderToBuy, SelectedCard);
+                WonderToBuy = null;
+                SelectedCard = null;
+                Game.FirstPlayer.ChosenCard = null;
+                Game.FirstPlayer.ChosenToken = null;
+                Game.SecondPlayer.ChosenCard = null;
+                Game.SecondPlayer.ChosenToken = null;
+                UpdateField();
+            }
+        }
+
+        public bool SelectCardCommandCanExecute(int idx)
+        {
+            switch (WonderToBuy.Effect)
+            {
+                case Wonder.WonderEffect.StealBrown: return idx < Game.CurrentPlayer.Opponent.BrownCards.Count;
+                case Wonder.WonderEffect.StealGray: return idx < Game.CurrentPlayer.Opponent.GrayCards.Count;
+                case Wonder.WonderEffect.TakeDiscard: return idx < Game.DiscardedCards.Count;
+                case Wonder.WonderEffect.Token: return idx < Game.AdditionalTokens.Count;
+            }
+            return false;
+        }
+
+        public void SelectTokenCommandExecuted(int idx)
+        {
+            Card card = (WonderToBuy != null && WonderToBuy.Effect == Wonder.WonderEffect.TakeDiscard) ? Game.CurrentPlayer.ChosenCard : SelectedCard;
+            Game.CurrentPlayer.ChosenToken = Game.GameTokens[idx];
+            AddCartToHand(card);
+            AddToken();
+            if (WonderToBuy == null || WonderToBuy.Effect != Wonder.WonderEffect.TakeDiscard)
+            {
+                Game.CurrentPlayer.BuyCard(SelectedCard);
+            }
+            else
+            {
+                Game.CurrentPlayer.BuildWonder(WonderToBuy, SelectedCard);
+                WonderToBuy = null;
+                Game.FirstPlayer.ChosenCard = null;
+                Game.SecondPlayer.ChosenCard = null;
+            }
+            Game.FirstPlayer.ChosenToken = null;
+            Game.SecondPlayer.ChosenToken = null;
+            SelectedCard = null;
+            SelectingToken = false;
+            TokensVisibility[idx] = false;
+            UpdateField();
+            OnPropertyChanged(nameof(TokensVisibility));
+        }
+
+        public void PeekCommandExecuted()
+        {
+            for (int i = 0; i < PlayersInterfaceVisibility.Length; i++)
+            {
+                if (PlayersInterfaceVisibility[i] == true) PlayersInterfaceVisibility[i] = false;
+                else PlayersInterfaceVisibility[i] = true;
+            }
+            if (PeekColor == Brushes.Transparent) PeekColor = Brushes.Green;
+            else PeekColor = Brushes.Transparent;
+            OnPropertyChanged(nameof(PlayersInterfaceVisibility));
         }
 
         public void OnPropertyChanged(string propertyName)

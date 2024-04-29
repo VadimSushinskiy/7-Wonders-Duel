@@ -28,7 +28,7 @@ namespace _7_Wonders
             _mediaPlayer = new MediaPlayer();
             _mediaPlayer.MediaEnded += Media_Ended;
             _mediaPlayer.Open(new Uri(audioFilePath));
-            _mediaPlayer.Volume = 0.05;
+            _mediaPlayer.Volume = 0.01;
 
             InitializeComponent();
             _mediaPlayer.Play();

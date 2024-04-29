@@ -17,6 +17,7 @@
             <RowDefinition Height="145"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <Rectangle Grid.Row="1" Fill="#717754"></Rectangle>
         <DockPanel LastChildFill="True" Grid.Row="0" Grid.RowSpan="2">
             <DockPanel Width="1920" Height="100" DockPanel.Dock="Top" LastChildFill="True">
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
@@ -35,35 +36,37 @@
                     <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Brick, StringFormat=Brick:&#x0d;&#x0a; {0}}"/>
                     <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Stone, StringFormat=Stone:&#x0d;&#x0a; {0}}"/>
                     <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Wood, StringFormat=Wood:&#x0d;&#x0a; {0}}"/>
-                    <StackPanel>
-                        <Button Height="45" Background="Red" Content="*" FontSize="46" Command="{Binding ChangeMenuViewCommand}"/>
-                        <TextBox Style="{StaticResource ResourceButtonTemplate}" Height="55" Text="{Binding SecondResources.Gold, StringFormat=Gold:&#x0d;&#x0a; {0}}"/>
-                    </StackPanel>
+                    <TextBox Style="{StaticResource ResourceButtonTemplate}" Text="{Binding SecondResources.Gold, StringFormat=Gold:&#x0d;&#x0a; {0}}"/>
+                    <Button VerticalAlignment="Top" Height="50" Background="Transparent" FontSize="46" Command="{Binding ChangeMenuViewCommand}">
+                        <Button.Content>
+                            <Image Source="../Images/Interface/menu-icon.png" Width="50"></Image>
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
                 <TextBox Style="{StaticResource ResourceButtonTemplate}" DockPanel.Dock="Left" Width="125" BorderThickness="0" Text="{Binding War, StringFormat=War Points:&#x0d;&#x0a; {0}}"/>
                 <TextBox Style="{StaticResource ResourceButtonTemplate}" DockPanel.Dock="Right" Width="125" BorderThickness="0" Text="{Binding War, StringFormat=War Points:&#x0d;&#x0a; {0}}"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image Source="{Binding TokensName[0]}" Visibility="{Binding TokensVisibility[0]}" ToolTip="{Binding TokensHints[0]}">
+                    <Image Source="{Binding TokensName[0]}" Visibility="{Binding TokensVisibility[0], Converter={StaticResource BoolToVis}}" ToolTip="{Binding TokensHints[0]}">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding SelectTokenCommand}" CommandParameter="0"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding TokensName[1]}" Visibility="{Binding TokensVisibility[1]}" ToolTip="{Binding TokensHints[1]}">
+                    <Image Source="{Binding TokensName[1]}" Visibility="{Binding TokensVisibility[1], Converter={StaticResource BoolToVis}}" ToolTip="{Binding TokensHints[1]}">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding SelectTokenCommand}" CommandParameter="1"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding TokensName[2]}" Visibility="{Binding TokensVisibility[2]}" ToolTip="{Binding TokensHints[2]}">
+                    <Image Source="{Binding TokensName[2]}" Visibility="{Binding TokensVisibility[2], Converter={StaticResource BoolToVis}}" ToolTip="{Binding TokensHints[2]}">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding SelectTokenCommand}" CommandParameter="2"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding TokensName[3]}" Visibility="{Binding TokensVisibility[3]}" ToolTip="{Binding TokensHints[3]}">
+                    <Image Source="{Binding TokensName[3]}" Visibility="{Binding TokensVisibility[3], Converter={StaticResource BoolToVis}}" ToolTip="{Binding TokensHints[3]}">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding SelectTokenCommand}" CommandParameter="3"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding TokensName[4]}" Visibility="{Binding TokensVisibility[4]}" ToolTip="{Binding TokensHints[4]}">
+                    <Image Source="{Binding TokensName[4]}" Visibility="{Binding TokensVisibility[4], Converter={StaticResource BoolToVis}}" ToolTip="{Binding TokensHints[4]}">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding SelectTokenCommand}" CommandParameter="4"/>
                         </Image.InputBindings>
@@ -80,36 +83,36 @@
             </DockPanel>
             <DockPanel Width="1920" Height="110" DockPanel.Dock="Top" LastChildFill="False">
                 <Grid DockPanel.Dock="Left">
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding PlayersInterfaceVisibility[0]}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding PlayersInterfaceVisibility[0], Converter={StaticResource BoolToVis}}">
                         <Image Source="{Binding FirstPlayerTokens[0]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[0]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[0]}"/>
                         <Image Source="{Binding FirstPlayerTokens[1]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[1]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[1]}"/>
                         <Image Source="{Binding FirstPlayerTokens[2]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[2]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[2]}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding PlayersInterfaceVisibility[1]}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding PlayersInterfaceVisibility[1], Converter={StaticResource BoolToVis}}">
                         <Image Source="{Binding SecondPlayerTokens[0]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding SecondPlayerTokenToolTip[0]}" ToolTipService.IsEnabled="{Binding SecondPlayerTokenToolTipEnable[0]}"/>
                         <Image Source="{Binding SecondPlayerTokens[1]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding SecondPlayerTokenToolTip[1]}" ToolTipService.IsEnabled="{Binding SecondPlayerTokenToolTipEnable[1]}"/>
                         <Image Source="{Binding SecondPlayerTokens[2]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[2]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[2]}"/>
                     </StackPanel>
                 </Grid>
                 <Grid DockPanel.Dock="Right">
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding PlayersInterfaceVisibility[0]}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding PlayersInterfaceVisibility[0], Converter={StaticResource BoolToVis}}">
                         <Image Source="{Binding FirstPlayerTokens[3]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[3]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[3]}"/>
                         <Image Source="{Binding FirstPlayerTokens[4]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[4]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[4]}"/>
                         <Image Source="{Binding FirstPlayerTokens[5]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[5]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[5]}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding PlayersInterfaceVisibility[1]}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding PlayersInterfaceVisibility[1], Converter={StaticResource BoolToVis}}">
                         <Image Source="{Binding SecondPlayerTokens[3]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[3]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[3]}"/>
                         <Image Source="{Binding SecondPlayerTokens[4]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[4]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[4]}"/>
                         <Image Source="{Binding SecondPlayerTokens[5]}" Width="100" Margin="5 0" ToolTipService.ToolTip="{Binding FirstPlayerTokenToolTip[5]}" ToolTipService.IsEnabled="{Binding FirstPlayerTokenToolTipEnable[5]}"/>
                     </StackPanel>
                 </Grid>
             </DockPanel>
-            <DockPanel Height="203" DockPanel.Dock="Bottom" >
+            <DockPanel Height="203" DockPanel.Dock="Bottom">
                 <Button Height="203" Width="22" DockPanel.Dock="Left" Command="{Binding HandFlipCommand}"/>
                 <Button Height="203" Width="22" DockPanel.Dock="Right" Command="{Binding HandFlipCommand}"/>
                 <Grid>
-                    <Grid Visibility="{Binding PlayersInterfaceVisibility[0]}">
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding FirstPlayerHandVisibility[0]}">
+                    <Grid Visibility="{Binding PlayersInterfaceVisibility[0], Converter={StaticResource BoolToVis}}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding FirstPlayerHandVisibility[0], Converter={StaticResource BoolToVis}}">
                             <Image Source="{Binding FirstPlayerCards[0]}"/>
                             <Image Source="{Binding FirstPlayerCards[1]}"/>
                             <Image Source="{Binding FirstPlayerCards[2]}"/>
@@ -126,7 +129,7 @@
                             <Image Source="{Binding FirstPlayerCards[13]}"/>
                             <Image Source="{Binding FirstPlayerCards[14]}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding FirstPlayerHandVisibility[1]}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding FirstPlayerHandVisibility[1], Converter={StaticResource BoolToVis}}">
                             <Image Source="{Binding FirstPlayerCards[15]}"/>
                             <Image Source="{Binding FirstPlayerCards[16]}"/>
                             <Image Source="{Binding FirstPlayerCards[17]}"/>
@@ -144,8 +147,8 @@
                             <Image Source="{Binding FirstPlayerCards[29]}"/>
                         </StackPanel>
                     </Grid>
-                    <Grid Visibility="{Binding PlayersInterfaceVisibility[1]}">
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding SecondPlayerHandVisibility[0]}">
+                    <Grid Visibility="{Binding PlayersInterfaceVisibility[1], Converter={StaticResource BoolToVis}}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding SecondPlayerHandVisibility[0], Converter={StaticResource BoolToVis}}">
                             <Image Source="{Binding SecondPlayerCards[0]}"/>
                             <Image Source="{Binding SecondPlayerCards[1]}"/>
                             <Image Source="{Binding SecondPlayerCards[2]}"/>
@@ -162,7 +165,7 @@
                             <Image Source="{Binding SecondPlayerCards[13]}"/>
                             <Image Source="{Binding SecondPlayerCards[14]}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding SecondPlayerHandVisibility[1]}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding SecondPlayerHandVisibility[1], Converter={StaticResource BoolToVis}}">
                             <Image Source="{Binding SecondPlayerCards[15]}"/>
                             <Image Source="{Binding SecondPlayerCards[16]}"/>
                             <Image Source="{Binding SecondPlayerCards[17]}"/>
@@ -183,7 +186,7 @@
                 </Grid>
             </DockPanel>
             <Canvas Width="300" DockPanel.Dock="Left">
-                <Canvas Canvas.Left="0" Visibility="{Binding PlayersInterfaceVisibility[0]}">
+                <Canvas Canvas.Left="0" Visibility="{Binding PlayersInterfaceVisibility[0], Converter={StaticResource BoolToVis}}">
                     <Image Source="{Binding BuildedWonders[0]}" Canvas.Top="42" Canvas.Left="205">
                         <Image.RenderTransform>
                             <RotateTransform Angle="90"></RotateTransform>
@@ -209,7 +212,7 @@
                         </Image>
                     </Border>
                 </Canvas>
-                <Canvas Canvas.Left="0" Visibility="{Binding PlayersInterfaceVisibility[1]}">
+                <Canvas Canvas.Left="0" Visibility="{Binding PlayersInterfaceVisibility[1], Converter={StaticResource BoolToVis}}">
                     <Image Source="{Binding BuildedWonders[4]}" Canvas.Top="42" Canvas.Left="205">
                         <Image.RenderTransform>
                             <RotateTransform Angle="90"></RotateTransform>
@@ -236,8 +239,8 @@
                     </Border>
                 </Canvas>
             </Canvas>
-            <Canvas Width="300" DockPanel.Dock="Right">
-                <Canvas Canvas.Right="0" Visibility="{Binding PlayersInterfaceVisibility[0]}">
+            <Canvas Width="300" DockPanel.Dock="Right" >
+                <Canvas Canvas.Right="0" Visibility="{Binding PlayersInterfaceVisibility[0], Converter={StaticResource BoolToVis}}">
                     <Image Source="{Binding BuildedWonders[2]}" Canvas.Top="168" Canvas.Right="80">
                         <Image.RenderTransform>
                             <RotateTransform Angle="-90"></RotateTransform>
@@ -263,7 +266,7 @@
                         </Image>
                     </Border>
                 </Canvas>
-                <Canvas Canvas.Right="0" Visibility="{Binding PlayersInterfaceVisibility[1]}">
+                <Canvas Canvas.Right="0" Visibility="{Binding PlayersInterfaceVisibility[1], Converter={StaticResource BoolToVis}}">
                     <Image Source="{Binding BuildedWonders[6]}" Canvas.Top="168" Canvas.Right="80">
                         <Image.RenderTransform>
                             <RotateTransform Angle="-90"></RotateTransform>
@@ -291,366 +294,366 @@
                 </Canvas>
             </Canvas>
             <Grid>
-                <Canvas Visibility="{Binding EpochVisibility[0]}">
-                    <Image Source="{Binding CardsName[0]}" Visibility="{Binding CardsVisibility[0]}" Canvas.Bottom="450" Canvas.Left="700">
+                <Canvas Visibility="{Binding EpochVisibility[0], Converter={StaticResource BoolToVis}}">
+                    <Image Source="{Binding CardsName[0]}" Visibility="{Binding CardsVisibility[0], Converter={StaticResource BoolToVis}}" Canvas.Bottom="450" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="0"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="0"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[1]}" Visibility="{Binding CardsVisibility[1]}" Canvas.Bottom="450" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[1]}" Visibility="{Binding CardsVisibility[1], Converter={StaticResource BoolToVis}}" Canvas.Bottom="450" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="1"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="1"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[2]}" Visibility="{Binding CardsVisibility[2]}" Canvas.Bottom="350" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[2]}" Visibility="{Binding CardsVisibility[2], Converter={StaticResource BoolToVis}}" Canvas.Bottom="350" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="2"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="2"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[3]}" Visibility="{Binding CardsVisibility[3]}" Canvas.Bottom="350" Canvas.Left="600">
+                    <Image Source="{Binding CardsName[3]}" Visibility="{Binding CardsVisibility[3], Converter={StaticResource BoolToVis}}" Canvas.Bottom="350" Canvas.Left="600">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="3"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="3"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[4]}" Visibility="{Binding CardsVisibility[4]}" Canvas.Bottom="350" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[4]}" Visibility="{Binding CardsVisibility[4], Converter={StaticResource BoolToVis}}" Canvas.Bottom="350" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="4"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="4"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[5]}" Visibility="{Binding CardsVisibility[5]}" Canvas.Bottom="250" Canvas.Left="900">
+                    <Image Source="{Binding CardsName[5]}" Visibility="{Binding CardsVisibility[5], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="900">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="5"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="5"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[6]}" Visibility="{Binding CardsVisibility[6]}" Canvas.Bottom="250" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[6]}" Visibility="{Binding CardsVisibility[6], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="6"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="6"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[7]}" Visibility="{Binding CardsVisibility[7]}" Canvas.Bottom="250" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[7]}" Visibility="{Binding CardsVisibility[7], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="7"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="7"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[8]}" Visibility="{Binding CardsVisibility[8]}" Canvas.Bottom="250" Canvas.Left="300">
+                    <Image Source="{Binding CardsName[8]}" Visibility="{Binding CardsVisibility[8], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="300">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="8"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="8"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[9]}" Visibility="{Binding CardsVisibility[9]}" Canvas.Bottom="150" Canvas.Left="1000">
+                    <Image Source="{Binding CardsName[9]}" Visibility="{Binding CardsVisibility[9], Converter={StaticResource BoolToVis}}" Canvas.Bottom="150" Canvas.Left="1000">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="9"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="9"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[10]}" Visibility="{Binding CardsVisibility[10]}" Canvas.Bottom="150" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[10]}" Visibility="{Binding CardsVisibility[10], Converter={StaticResource BoolToVis}}" Canvas.Bottom="150" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="10"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="10"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[11]}" Visibility="{Binding CardsVisibility[11]}" Canvas.Bottom="150" Canvas.Left="600">
+                    <Image Source="{Binding CardsName[11]}" Visibility="{Binding CardsVisibility[11], Converter={StaticResource BoolToVis}}" Canvas.Bottom="150" Canvas.Left="600">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="11"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="11"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[12]}" Visibility="{Binding CardsVisibility[12]}" Canvas.Bottom="150" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[12]}" Visibility="{Binding CardsVisibility[12], Converter={StaticResource BoolToVis}}" Canvas.Bottom="150" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="12"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="12"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[13]}" Visibility="{Binding CardsVisibility[13]}" Canvas.Bottom="150" Canvas.Left="200">
+                    <Image Source="{Binding CardsName[13]}" Visibility="{Binding CardsVisibility[13], Converter={StaticResource BoolToVis}}" Canvas.Bottom="150" Canvas.Left="200">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="13"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="13"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[14]}" Visibility="{Binding CardsVisibility[14]}" Canvas.Bottom="50" Canvas.Left="1100">
+                    <Image Source="{Binding CardsName[14]}" Visibility="{Binding CardsVisibility[14], Converter={StaticResource BoolToVis}}" Canvas.Bottom="50" Canvas.Left="1100">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="14"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="14"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[15]}" Visibility="{Binding CardsVisibility[15]}" Canvas.Bottom="50" Canvas.Left="900">
+                    <Image Source="{Binding CardsName[15]}" Visibility="{Binding CardsVisibility[15], Converter={StaticResource BoolToVis}}" Canvas.Bottom="50" Canvas.Left="900">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="15"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="15"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[16]}" Visibility="{Binding CardsVisibility[16]}" Canvas.Bottom="50" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[16]}" Visibility="{Binding CardsVisibility[16], Converter={StaticResource BoolToVis}}" Canvas.Bottom="50" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="16"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="16"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[17]}" Visibility="{Binding CardsVisibility[17]}" Canvas.Bottom="50" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[17]}" Visibility="{Binding CardsVisibility[17], Converter={StaticResource BoolToVis}}" Canvas.Bottom="50" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="17"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="17"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[18]}" Visibility="{Binding CardsVisibility[18]}" Canvas.Bottom="50" Canvas.Left="300">
+                    <Image Source="{Binding CardsName[18]}" Visibility="{Binding CardsVisibility[18], Converter={StaticResource BoolToVis}}" Canvas.Bottom="50" Canvas.Left="300">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="18"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="18"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[19]}" Visibility="{Binding CardsVisibility[19]}" Canvas.Bottom="50" Canvas.Left="100">
+                    <Image Source="{Binding CardsName[19]}" Visibility="{Binding CardsVisibility[19], Converter={StaticResource BoolToVis}}" Canvas.Bottom="50" Canvas.Left="100">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="19"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="19"/>
                         </Image.InputBindings>
                     </Image>
                 </Canvas>
-                <Canvas Visibility="{Binding EpochVisibility[1]}">
-                    <Image Source="{Binding CardsName[20]}" Visibility="{Binding CardsVisibility[20]}" Canvas.Bottom="450" Canvas.Left="100">
+                <Canvas Visibility="{Binding EpochVisibility[1], Converter={StaticResource BoolToVis}}">
+                    <Image Source="{Binding CardsName[20]}" Visibility="{Binding CardsVisibility[20], Converter={StaticResource BoolToVis}}" Canvas.Bottom="450" Canvas.Left="100">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="20"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="20"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[21]}" Visibility="{Binding CardsVisibility[21]}" Canvas.Bottom="450" Canvas.Left="300">
+                    <Image Source="{Binding CardsName[21]}" Visibility="{Binding CardsVisibility[21], Converter={StaticResource BoolToVis}}" Canvas.Bottom="450" Canvas.Left="300">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="21"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="21"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[22]}" Visibility="{Binding CardsVisibility[22]}" Canvas.Bottom="450" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[22]}" Visibility="{Binding CardsVisibility[22], Converter={StaticResource BoolToVis}}" Canvas.Bottom="450" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="22"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="22"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[23]}" Visibility="{Binding CardsVisibility[23]}" Canvas.Bottom="450" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[23]}" Visibility="{Binding CardsVisibility[23], Converter={StaticResource BoolToVis}}" Canvas.Bottom="450" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="23"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="23"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[24]}" Visibility="{Binding CardsVisibility[24]}" Canvas.Bottom="450" Canvas.Left="900">
+                    <Image Source="{Binding CardsName[24]}" Visibility="{Binding CardsVisibility[24], Converter={StaticResource BoolToVis}}" Canvas.Bottom="450" Canvas.Left="900">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="24"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="24"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[25]}" Visibility="{Binding CardsVisibility[25]}" Canvas.Bottom="450" Canvas.Left="1100">
+                    <Image Source="{Binding CardsName[25]}" Visibility="{Binding CardsVisibility[25], Converter={StaticResource BoolToVis}}" Canvas.Bottom="450" Canvas.Left="1100">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="25"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="25"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[26]}" Visibility="{Binding CardsVisibility[26]}" Canvas.Bottom="350" Canvas.Left="200">
+                    <Image Source="{Binding CardsName[26]}" Visibility="{Binding CardsVisibility[26], Converter={StaticResource BoolToVis}}" Canvas.Bottom="350" Canvas.Left="200">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="26"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="26"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[27]}" Visibility="{Binding CardsVisibility[27]}" Canvas.Bottom="350" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[27]}" Visibility="{Binding CardsVisibility[27], Converter={StaticResource BoolToVis}}" Canvas.Bottom="350" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="27"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="27"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[28]}" Visibility="{Binding CardsVisibility[28]}" Canvas.Bottom="350" Canvas.Left="600">
+                    <Image Source="{Binding CardsName[28]}" Visibility="{Binding CardsVisibility[28], Converter={StaticResource BoolToVis}}" Canvas.Bottom="350" Canvas.Left="600">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="28"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="28"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[29]}" Visibility="{Binding CardsVisibility[29]}" Canvas.Bottom="350" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[29]}" Visibility="{Binding CardsVisibility[29], Converter={StaticResource BoolToVis}}" Canvas.Bottom="350" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="29"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="29"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[30]}" Visibility="{Binding CardsVisibility[30]}" Canvas.Bottom="350" Canvas.Left="1000">
+                    <Image Source="{Binding CardsName[30]}" Visibility="{Binding CardsVisibility[30], Converter={StaticResource BoolToVis}}" Canvas.Bottom="350" Canvas.Left="1000">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="30"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="30"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[31]}" Visibility="{Binding CardsVisibility[31]}" Canvas.Bottom="250" Canvas.Left="300">
+                    <Image Source="{Binding CardsName[31]}" Visibility="{Binding CardsVisibility[31], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="300">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="31"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="31"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[32]}" Visibility="{Binding CardsVisibility[32]}" Canvas.Bottom="250" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[32]}" Visibility="{Binding CardsVisibility[32], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="32"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="32"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[33]}" Visibility="{Binding CardsVisibility[33]}" Canvas.Bottom="250" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[33]}" Visibility="{Binding CardsVisibility[33], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="33"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="33"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[34]}" Visibility="{Binding CardsVisibility[34]}" Canvas.Bottom="250" Canvas.Left="900">
+                    <Image Source="{Binding CardsName[34]}" Visibility="{Binding CardsVisibility[34], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="900">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="34"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="34"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[35]}" Visibility="{Binding CardsVisibility[35]}" Canvas.Bottom="150" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[35]}" Visibility="{Binding CardsVisibility[35], Converter={StaticResource BoolToVis}}" Canvas.Bottom="150" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="35"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="35"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[36]}" Visibility="{Binding CardsVisibility[36]}" Canvas.Bottom="150" Canvas.Left="600">
+                    <Image Source="{Binding CardsName[36]}" Visibility="{Binding CardsVisibility[36], Converter={StaticResource BoolToVis}}" Canvas.Bottom="150" Canvas.Left="600">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="36"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="36"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[37]}" Visibility="{Binding CardsVisibility[37]}" Canvas.Bottom="150" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[37]}" Visibility="{Binding CardsVisibility[37], Converter={StaticResource BoolToVis}}" Canvas.Bottom="150" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="37"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="37"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[38]}" Visibility="{Binding CardsVisibility[38]}" Canvas.Bottom="50" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[38]}" Visibility="{Binding CardsVisibility[38], Converter={StaticResource BoolToVis}}" Canvas.Bottom="50" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="38"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="38"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[39]}" Visibility="{Binding CardsVisibility[39]}" Canvas.Bottom="50" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[39]}" Visibility="{Binding CardsVisibility[39], Converter={StaticResource BoolToVis}}" Canvas.Bottom="50" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="39"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="39"/>
                         </Image.InputBindings>
                     </Image>
                 </Canvas>
-                <Canvas Visibility="{Binding EpochVisibility[2]}">
-                    <Image Source="{Binding CardsName[40]}" Visibility="{Binding CardsVisibility[40]}" Canvas.Bottom="470" Canvas.Left="500">
+                <Canvas Visibility="{Binding EpochVisibility[2], Converter={StaticResource BoolToVis}}">
+                    <Image Source="{Binding CardsName[40]}" Visibility="{Binding CardsVisibility[40], Converter={StaticResource BoolToVis}}" Canvas.Bottom="470" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="40"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="40"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[41]}" Visibility="{Binding CardsVisibility[41]}" Canvas.Bottom="470" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[41]}" Visibility="{Binding CardsVisibility[41], Converter={StaticResource BoolToVis}}" Canvas.Bottom="470" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="41"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="41"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[42]}" Visibility="{Binding CardsVisibility[42]}" Canvas.Bottom="390" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[42]}" Visibility="{Binding CardsVisibility[42], Converter={StaticResource BoolToVis}}" Canvas.Bottom="390" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="42"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="42"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[43]}" Visibility="{Binding CardsVisibility[43]}" Canvas.Bottom="390" Canvas.Left="600">
+                    <Image Source="{Binding CardsName[43]}" Visibility="{Binding CardsVisibility[43], Converter={StaticResource BoolToVis}}" Canvas.Bottom="390" Canvas.Left="600">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="43"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="43"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[44]}" Visibility="{Binding CardsVisibility[44]}" Canvas.Bottom="390" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[44]}" Visibility="{Binding CardsVisibility[44], Converter={StaticResource BoolToVis}}" Canvas.Bottom="390" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="44"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="44"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[45]}" Visibility="{Binding CardsVisibility[45]}" Canvas.Bottom="320" Canvas.Left="300">
+                    <Image Source="{Binding CardsName[45]}" Visibility="{Binding CardsVisibility[45], Converter={StaticResource BoolToVis}}" Canvas.Bottom="320" Canvas.Left="300">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="45"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="45"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[46]}" Visibility="{Binding CardsVisibility[46]}" Canvas.Bottom="320" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[46]}" Visibility="{Binding CardsVisibility[46], Converter={StaticResource BoolToVis}}" Canvas.Bottom="320" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="46"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="46"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[47]}" Visibility="{Binding CardsVisibility[47]}" Canvas.Bottom="320" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[47]}" Visibility="{Binding CardsVisibility[47], Converter={StaticResource BoolToVis}}" Canvas.Bottom="320" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="47"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="47"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[48]}" Visibility="{Binding CardsVisibility[48]}" Canvas.Bottom="320" Canvas.Left="900">
+                    <Image Source="{Binding CardsName[48]}" Visibility="{Binding CardsVisibility[48], Converter={StaticResource BoolToVis}}" Canvas.Bottom="320" Canvas.Left="900">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="48"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="48"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[49]}" Visibility="{Binding CardsVisibility[49]}" Canvas.Bottom="250" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[49]}" Visibility="{Binding CardsVisibility[49], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="49"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="49"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[50]}" Visibility="{Binding CardsVisibility[50]}" Canvas.Bottom="250" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[50]}" Visibility="{Binding CardsVisibility[50], Converter={StaticResource BoolToVis}}" Canvas.Bottom="250" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="50"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="50"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[51]}" Visibility="{Binding CardsVisibility[51]}" Canvas.Bottom="180" Canvas.Left="300">
+                    <Image Source="{Binding CardsName[51]}" Visibility="{Binding CardsVisibility[51], Converter={StaticResource BoolToVis}}" Canvas.Bottom="180" Canvas.Left="300">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="51"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="51"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[52]}" Visibility="{Binding CardsVisibility[52]}" Canvas.Bottom="180" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[52]}" Visibility="{Binding CardsVisibility[52], Converter={StaticResource BoolToVis}}" Canvas.Bottom="180" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="52"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="52"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[53]}" Visibility="{Binding CardsVisibility[53]}" Canvas.Bottom="180" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[53]}" Visibility="{Binding CardsVisibility[53], Converter={StaticResource BoolToVis}}" Canvas.Bottom="180" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="53"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="53"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[54]}" Visibility="{Binding CardsVisibility[54]}" Canvas.Bottom="180" Canvas.Left="900">
+                    <Image Source="{Binding CardsName[54]}" Visibility="{Binding CardsVisibility[54], Converter={StaticResource BoolToVis}}" Canvas.Bottom="180" Canvas.Left="900">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="54"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="54"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[55]}" Visibility="{Binding CardsVisibility[55]}" Canvas.Bottom="110" Canvas.Left="400">
+                    <Image Source="{Binding CardsName[55]}" Visibility="{Binding CardsVisibility[55], Converter={StaticResource BoolToVis}}" Canvas.Bottom="110" Canvas.Left="400">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="55"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="55"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[56]}" Visibility="{Binding CardsVisibility[56]}" Canvas.Bottom="110" Canvas.Left="600">
+                    <Image Source="{Binding CardsName[56]}" Visibility="{Binding CardsVisibility[56], Converter={StaticResource BoolToVis}}" Canvas.Bottom="110" Canvas.Left="600">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="56"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="56"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[57]}" Visibility="{Binding CardsVisibility[57]}" Canvas.Bottom="110" Canvas.Left="800">
+                    <Image Source="{Binding CardsName[57]}" Visibility="{Binding CardsVisibility[57], Converter={StaticResource BoolToVis}}" Canvas.Bottom="110" Canvas.Left="800">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="57"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="57"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[58]}" Visibility="{Binding CardsVisibility[58]}" Canvas.Bottom="40" Canvas.Left="500">
+                    <Image Source="{Binding CardsName[58]}" Visibility="{Binding CardsVisibility[58], Converter={StaticResource BoolToVis}}" Canvas.Bottom="40" Canvas.Left="500">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="58"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="58"/>
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding CardsName[59]}" Visibility="{Binding CardsVisibility[59]}" Canvas.Bottom="40" Canvas.Left="700">
+                    <Image Source="{Binding CardsName[59]}" Visibility="{Binding CardsVisibility[59], Converter={StaticResource BoolToVis}}" Canvas.Bottom="40" Canvas.Left="700">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding BuyCommand}" CommandParameter="59"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding SellCommand}" CommandParameter="59"/>
@@ -659,7 +662,7 @@
                 </Canvas>
             </Grid>
         </DockPanel>
-        <WrapPanel Grid.Row="1" Background="AliceBlue" Visibility="{Binding WindowSelectingVisibility}">
+        <WrapPanel Grid.Row="1" Background="AliceBlue" Visibility="{Binding WindowSelectingVisibility, Converter={StaticResource BoolToVis}}">
             <Image Source="{Binding SelectingCardsNames[0]}" ToolTipService.IsEnabled="{Binding AdditionalTokensToolTipEnable[0]}" ToolTipService.ToolTip="{Binding TokensHints[5]}">
                 <Image.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding SelectCardCommand}" CommandParameter="0"/>
@@ -956,13 +959,14 @@
                 </Image.InputBindings>
             </Image>
         </WrapPanel>
-        <Grid Grid.Row="0" Grid.RowSpan="2" Width="1920" Height="1080" Background="AliceBlue" Visibility="{Binding EpochVisibility[3]}">
+        <Grid Grid.Row="0" Grid.RowSpan="2" Width="1920" Height="1080" Background="AliceBlue" Visibility="{Binding EpochVisibility[3], Converter={StaticResource BoolToVis}}">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock FontSize="44" Foreground="{Binding WinColor}" FontWeight="Bold" Text="{Binding WinType}"/>
                 <TextBlock FontSize="44" Foreground="{Binding WinColor}" FontWeight="Bold" Text="{Binding WinnerName, StringFormat=Переможець: {0}}"/>
-                <Button Content="Реванш" Width="200" Height="100" Command="{Binding RestartCommand}"/>
+                <Button Content="Реванш" Width="200" Height="70" Margin="0 0 0 20" Command="{Binding RestartCommand}"/>
+                <Button Content="Вийти" Width="200" Height="70" Command="{Binding QiutCommand}"/>
             </StackPanel>
-            <Canvas Visibility="{Binding StatisticVisibility}">
+            <Canvas Visibility="{Binding StatisticVisibility, Converter={StaticResource BoolToVis}}">
                 <StackPanel Canvas.Top="100" Canvas.Left="30">
                     <DockPanel>
                         <TextBlock FontSize="44" Text="{Binding FirstPlayerName}" DockPanel.Dock="Left"/>
@@ -1048,14 +1052,16 @@
             </Canvas>
         </Grid>
         <Grid Grid.Row="0" Grid.RowSpan="2" Background="#3F000000" Visibility="{Binding MenuVisibility, Converter={StaticResource BoolToVis}}">
-            <Grid Width="350" Height="450" Background="BurlyWood" Visibility="{Binding MenuSettingVisibility[0], Converter={StaticResource BoolToVis}}">
+            <Grid Width="350" Height="450" Visibility="{Binding MenuSettingVisibility[0], Converter={StaticResource BoolToVis}}">
+                <Rectangle Fill="#ABBFAA" Width="350" Height="450" Opacity="0.9" RadiusX="35" RadiusY="35"/>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Button Width="250" Height="70" Content="Назад" Margin="0 0 0 50" FontSize="32" Command="{Binding ChangeMenuViewCommand}"/>
                     <Button Width="250" Height="70" Content="Налаштування" Margin="0 0 0 50" FontSize="32" Command="{Binding ShowSettingsCommand}"/>
                     <Button Width="250" Height="70" Content="Вийти" FontSize="32" Click="Button_Click" Command="{Binding QiutCommand}"/>
                 </StackPanel>
             </Grid>
-            <Canvas Width="700" Height="300" Background="BurlyWood" Visibility="{Binding MenuSettingVisibility[1], Converter={StaticResource BoolToVis}}">
+            <Canvas Width="700" Height="300" Visibility="{Binding MenuSettingVisibility[1], Converter={StaticResource BoolToVis}}">
+                <Rectangle Fill="#ABBFAA" Width="700" Height="300" Opacity="0.9" RadiusX="35" RadiusY="35"/>
                 <Button Content="Назад" FontSize="24" Width="200" Height="70" Command="{Binding ChangeMenuViewCommand}"/>
                 <Label FontSize="32" Canvas.Top="125" Foreground="White" Canvas.Left="220">Вимкнути звук</Label>
                 <CheckBox Canvas.Left="450" Canvas.Top="141" IsChecked="{Binding IsMuted}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
